@@ -36,13 +36,15 @@ typedef struct		s_op
 {
 	char			*name;
 	int				nb_param;
-	char			params_types[4];
+	char			params_types[3];
 	int				opcode;
 	int				nb_tours;
 	char			*full_name;
 	char			params_byte;
 	char			index_size;
 }					t_op;
+
+t_op				*g_tab;
 
 /*
 ** read_file.c
@@ -74,6 +76,7 @@ void				check_t_ind(char *ins);
 */
 void				ft_error(char *str);
 char				*point_jump(char *p);
+void				exit_notice(char *note, char *line);
 
 /*
 ** clean_data.c
@@ -84,6 +87,7 @@ void				convert_tabs(char *str);
 /*
 ** parse_lines.c
 */
+char 				type_arg(char *arg);
 void				ft_parse_lines(t_line *str);
 
 /*
