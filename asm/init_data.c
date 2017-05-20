@@ -117,6 +117,8 @@ void		trim_line(char *line, t_asm *file)
 	free(line);
 	line = ft_strchr(s->line, COMMENT_CHAR);
 	ft_strclr(line);
+	if (s->line[ft_strlen(s->line) - 1] == ' ')
+		s->line[ft_strlen(s->line) - 1] = '\0';
 	del_tab(tab);
 }
 

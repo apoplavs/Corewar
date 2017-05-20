@@ -23,6 +23,8 @@ void		set_args(char *a1, char *a2, char *a3, char **params)
 		*a2 = type_arg(params[1]);
 	if (params[1] && params[2])
 		*a3 = type_arg(params[2]);
+	if (params[1] && params[2] && params[3])
+		exit_notice("invalid argument ", params[3]);
 }
 
 int 		get_instruction(char *inst)
@@ -64,18 +66,22 @@ char 		type_arg(char *arg)
 
 void 		check_arguments(char a1, char a2, char a3, int n)
 {
-	if ((a1 & g_tab[n].params_types[0]) == 0)
-		ft_error("invalid type of argument");
+	if (g_tab[n].nb_param == 1)
+	{
+		if ((a1 & g_tab[n].params_types[0]) == 0
+			|| a2 > 0 || a3 > 0)
+			ft_error("invalid parameter");
+	}
 	if (g_tab[n].nb_param == 2)
 	{
-		if ((a2 & g_tab[n].params_types[1]) == 0)
-			ft_error("invalid type of argument");
+		if ((a2 & g_tab[n].params_types[1]) == 0 || a3 > 0)
+			ft_error("invalid parameter");
 	}
 	else if (g_tab[n].nb_param == 3)
 	{
 		if ((a2 & g_tab[n].params_types[1]) == 0
 			|| (a3 & g_tab[n].params_types[2]) == 0)
-			ft_error("invalid type of argument");
+			ft_error("invalid type of parameter");
 	}
 }
 

@@ -51,7 +51,7 @@ shield_init:
 	ld		%0, r2
 
 shield:
-	live	%21
+	live	%21	  
 	st		r2, 124
 	st		r2, 124
 	st		r2, 124

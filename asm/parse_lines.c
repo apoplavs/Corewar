@@ -75,6 +75,9 @@ void 		ft_parse_lines(t_line *str)
 	start = str;
 	while (str->next->next)
 	{
+		if (str->line[ft_strlen(str->line) - 1] == SEPARATOR_CHAR
+			|| ft_strstr(str->line, ",,"))
+			exit_notice("Syntax error at token ", str->line);
 		tab = ft_strsplit(str->line, ' ');
 		if (tab[0] && tab[1] && tab[2] && !tab[3])
 			parse3(tab, ft_strsplit(tab[2], SEPARATOR_CHAR), start);

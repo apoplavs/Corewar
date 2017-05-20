@@ -37,7 +37,7 @@ void		check_label_name(char *name)
 		i++;
 	}
 	if (name[i] != LABEL_CHAR || name[i + 1])
-		exit_notice("invalid label ", name);
+		exit_notice("Lexical error ", name);
 }
 
 void		check_t_reg(char *ins)
@@ -66,6 +66,8 @@ void		check_t_dir(char *ins)
 			if (!ft_isdigit(ins[i]))
 				exit_notice("invalid argument ", ins);
 	}
+	else
+		exit_notice("invalid argument ", ins);
 }
 
 void		check_t_ind(char *ins)

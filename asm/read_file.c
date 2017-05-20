@@ -12,6 +12,24 @@
 
 #include "asm.h"
 
+int 		is_no_code(char *line)
+{
+	int 	i;
+
+	i = 0;
+	if (line[0] == COMMENT_CHAR)
+		return (1);
+	while (line[i])
+	{
+		if (line[i] == COMMENT_CHAR)
+			return (1);
+		if (line[i] != '\t' && line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void		make_line(t_asm *file)
 {
 	t_line	*line;
@@ -60,7 +78,7 @@ void		read_file(int fd, t_asm *file)
 	make_line(file);
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (line[0] == '\0' || line[0] == COMMENT_CHAR)
+		if (line[0] == '\0'	|| is_no_code(line))
 			free(line);
 		else if (ft_strchr(LABEL_CHARS, line[0])
 				 || line[0] == ' ' || line[0] == '\t')
