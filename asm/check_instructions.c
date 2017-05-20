@@ -21,7 +21,7 @@ void		set_args(char *a1, char *a2, char *a3, char **params)
 		*a1 = type_arg(params[0]);
 	if (params[1])
 		*a2 = type_arg(params[1]);
-	if (params[2])
+	if (params[1] && params[2])
 		*a3 = type_arg(params[2]);
 }
 
@@ -36,7 +36,7 @@ int 		get_instruction(char *inst)
 			return (i);
 		i++;
 	}
-	exit_notice("invalid argument : ", inst);
+	exit_notice("invalid instruction ", inst);
 	return (-1);
 }
 
@@ -58,24 +58,24 @@ char 		type_arg(char *arg)
 		return (T_IND);
 	}
 	else
-		exit_notice("invalid argument : ", arg);
+		exit_notice("invalid argument ", arg);
 	return (0);
 }
 
-void 		check_instruction(char *a1, char *a2, char *a3, int n)
+void 		check_arguments(char a1, char a2, char a3, int n)
 {
-	if (g_tab[n].nb_param == 1)
+	if ((a1 & g_tab[n].params_types[0]) == 0)
+		ft_error("invalid type of argument");
+	if (g_tab[n].nb_param == 2)
 	{
-		if ((*a1 & g_tab[n].params_types[0]) == 0)
+		if ((a2 & g_tab[n].params_types[1]) == 0)
 			ft_error("invalid type of argument");
-
-	}
-	else if (g_tab[n].nb_param == 2)
-	{
-
 	}
 	else if (g_tab[n].nb_param == 3)
 	{
-
+		if ((a2 & g_tab[n].params_types[1]) == 0
+			|| (a3 & g_tab[n].params_types[2]) == 0)
+			ft_error("invalid type of argument");
 	}
 }
+

@@ -33,11 +33,11 @@ void		check_label_name(char *name)
 	while (name[i] && name[i] != LABEL_CHAR)
 	{
 		if (!ft_strchr(LABEL_CHARS, name[i]))
-			exit_notice("invalid label : ", name);
+			exit_notice("invalid label ", name);
 		i++;
 	}
 	if (name[i] != LABEL_CHAR || name[i + 1])
-		exit_notice("invalid label : ", name);
+		exit_notice("invalid label ", name);
 }
 
 void		check_t_reg(char *ins)
@@ -58,13 +58,13 @@ void		check_t_dir(char *ins)
 	{
 		while (ins[++i])
 			if (!ft_strchr(LABEL_CHARS, ins[i]))
-				exit_notice("invalid label : ", ins);
+				exit_notice("invalid label ", ins);
 	}
 	else if (ins[1] == '-' || ft_isdigit(ins[1]))
 	{
 		while (ins[++i])
 			if (!ft_isdigit(ins[i]))
-				exit_notice("invalid argument : ", ins);
+				exit_notice("invalid argument ", ins);
 	}
 }
 
@@ -77,13 +77,13 @@ void		check_t_ind(char *ins)
 	{
 		while (ins[++i])
 			if (!ft_strchr(LABEL_CHARS, ins[i]))
-				exit_notice("invalid label : ", ins);
+				exit_notice("invalid label ", ins);
 	}
 	else
 	{
 		while (ins[++i])
 			if (!ft_isdigit(ins[i]))
-				exit_notice("invalid argument : ", ins);
+				exit_notice("invalid argument ", ins);
 	}
 
 }

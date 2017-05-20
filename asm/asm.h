@@ -101,6 +101,7 @@ void    make_cor(t_asm *file);
 void				set_args(char *a1, char *a2, char *a3, char **params);
 int 				get_instruction(char *inst);
 char 				type_arg(char *arg);
+void 				check_arguments(char a1, char a2, char a3, int n);
 
 #endif
 
