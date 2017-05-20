@@ -12,41 +12,6 @@
 
 #include "asm.h"
 
-void		set_args(char *a1, char *a2, char *a3, char **params)
-{
-	*a1 = 0;
-	*a2 = 0;
-	*a3 = 0;
-	if (params[0])
-		*a1 = type_arg(params[0]);
-	if (params[1])
-		*a2 = type_arg(params[1]);
-	if (params[2])
-		*a3 = type_arg(params[2]);
-}
-
-char 		type_arg(char *arg)
-{
-	if (arg[0] == 'r' && ft_isdigit(arg[1]))
-	{
-		check_t_reg(arg);
-		return (T_REG);
-	}
-	else if (arg[0] == DIRECT_CHAR)
-	{
-		check_t_dir(arg);
-		return (T_DIR);
-	}
-	else if (arg[0] == '-' || ft_isdigit(arg[0]) || arg[0] == LABEL_CHAR)
-	{
-		check_t_ind(arg);
-		return (T_IND);
-	}
-	else
-		exit_notice("invalid argument : ", arg);
-	return (0);
-}
-
 void		parse3(char **tab, t_line *str)
 {
 
@@ -58,10 +23,11 @@ void		parse2(char **tab, t_line *str)
 	char 	a1;
 	char 	a2;
 	char 	a3;
+	int 	i;
 
 	params = ft_strsplit(tab[1], SEPARATOR_CHAR);
 	set_args(&a1, &a2, &a3, params);
-	// continued here
+	i = get_instruction(tab[0]);
 
 }
 

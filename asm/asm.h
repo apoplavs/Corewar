@@ -87,7 +87,6 @@ void				convert_tabs(char *str);
 /*
 ** parse_lines.c
 */
-char 				type_arg(char *arg);
 void				ft_parse_lines(t_line *str);
 
 /*
@@ -95,4 +94,14 @@ void				ft_parse_lines(t_line *str);
 */
 void    make_cor(t_asm *file);
 
+
+/*
+** check_instruction.c
+*/
+void				set_args(char *a1, char *a2, char *a3, char **params);
+int 				get_instruction(char *inst);
+char 				type_arg(char *arg);
+
 #endif
+
+
