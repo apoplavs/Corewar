@@ -90,5 +90,5 @@ void 		ft_parse_lines(t_line *str)
 		del_tab(tab);
 		str = str->next;
 	}
-	ft_printf("it`s good\n");
+	//ft_printf("it`s good\n"); //DELETE!!
 }

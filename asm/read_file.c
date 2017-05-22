@@ -49,6 +49,16 @@ void		make_line(t_asm *file)
 	}
 }
 
+void	create_filename_fd(t_asm *file)
+{
+	char	*f_name;
+
+	if (!(f_name = ft_strjoin(file->filename, ".cor")))
+		exit(1);
+	file->fd_filename = open(f_name, O_WRONLY|O_TRUNC|O_CREAT, S_IREAD|S_IWRITE);
+	ft_strdel(&f_name);
+}
+
 void		read_filename(int fd, char *filename, t_asm	*file)
 {
 	char 	*line;
@@ -69,6 +79,7 @@ void		read_filename(int fd, char *filename, t_asm	*file)
 	}
 	if (!file->filename || !file->comment || !file->name)
 		ft_error("invalid file");
+	create_filename_fd(file);
 }
 
 void		read_file(int fd, t_asm *file)
@@ -89,4 +100,5 @@ void		read_file(int fd, t_asm *file)
 		else
 			ft_error(ft_strjoin("\ninvalid instruction : ", line));
 	}
+    free(line);
 }

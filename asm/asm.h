@@ -16,32 +16,58 @@
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
 
+typedef struct  s_mark_inside
+{
+    int				before_command_byte;
+    int				place_of_byte;
+    int				rdi;
+    struct s_mark_inside   *next;
+}               t_mark_inside;
+
+typedef struct  s_mark
+{
+    char            *mark;
+    int             steps;
+    t_mark_inside  *start;
+    struct s_mark   *next;
+}               t_mark;
+
 typedef struct		s_line
 {
-	char			*line;
-	struct s_line	*next;
+    char			*line;
+    struct s_line	*next;
 }					t_line;
 
 typedef struct		s_asm
 {
-	unsigned int	magic;
-	unsigned int	prog_size;
-	char			*name;
-	char			*comment;
-	char			*filename;
-	t_line			*code;
+    unsigned int	magic;
+    unsigned int	prog_size;
+    char			*name;
+    char			*comment;
+    char			*filename;
+    int             fd_filename;
+    t_line			*code;
+
+    char            *header;
+    char            *prog;
+    int             prog_len;
+    int             i;
+    int 			arg_byte;
+    int             command_byte;
+    int				tab_nb;
+    t_mark          *mark;
 }					t_asm;
 
 typedef struct		s_op
 {
-	char			*name;
-	int				nb_param;
-	char			params_types[3];
-	int				opcode;
-	int				nb_tours;
-	char			*full_name;
-	char			params_byte;
-	char			index_size;
+    char			*name;
+    int				nb_param;
+    char			params_types[3];
+    int				opcode;
+    int				nb_tours;
+    char			*full_name;
+    char			params_byte;
+    char			index_size;
 }					t_op;
 
 t_op				*g_tab;
@@ -103,6 +129,21 @@ int 				get_instruction(char *inst);
 char 				type_arg(char *arg);
 void 				check_arguments(char a1, char a2, char a3, int n);
 
+/*
+** ik_functions
+*/
+void    make_cor(t_asm *file);
+void	print_memory(t_asm *file, const void *addr, size_t size); // delete
+int		find_quantity_elem_in_line(char **line);
+void    make_prog(t_asm *file);
+
+void    write_reg(t_asm *file, char *str, unsigned char reg);
+void    write_ind(t_asm *file, char *str, unsigned short ind);
+void    write_dir(t_asm *file, char *str, unsigned int dir);
+
+void    init_mark(t_asm *file, char *name, int steps);
+void    init_mark_inside(t_asm *file, t_mark **mark, int rdi);
+void    write_command(t_asm *file, char **line);
+void    write_mark_place(t_asm *file, char *mark, int rdi);
+
 #endif
-
-
