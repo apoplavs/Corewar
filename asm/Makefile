@@ -26,7 +26,7 @@ SRC =   main.c \
         check_data.c \
         read_file.c \
         parse_lines.c \
-        clean_data.c ik_1.c \
+        clean_data.c \
         check_instructions.c \
         ik_1.c \
         ik_2.c \
@@ -39,7 +39,7 @@ OBJ = $(SRC:.c=.o)
 
 HEADERS = ../libftprintf/get_next_line.h asm.h ../op.h
 
-FLAGS = -Wall -Wextra 
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
