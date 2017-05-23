@@ -46,10 +46,7 @@ static t_op	tab[17] =
 void		write_file(t_asm *file)
 {
 	t_line		*line;
-	int 	i;
-
-	i = 0;
-
+	
 	line = file->code;
 	ft_printf("filename = %s\n", file->filename);
 	ft_printf("name = %s\n", file->name);
