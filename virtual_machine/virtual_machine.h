@@ -21,7 +21,7 @@
 
 typedef struct	s_pc
 {
-	int 			r[17];
+	unsigned int 	r[17];
 	int 			live;
 	int				cycles;
 	int 			carry;
@@ -40,7 +40,7 @@ typedef struct	s_st
 	unsigned char		*comment;
 	unsigned char 		*code;
 
-	int 				player_number;
+	unsigned int 		player_number;
     int                 count_live;
 }				t_st;
 
@@ -52,7 +52,7 @@ typedef struct	s_struct
 	t_st			**players;
 
 	unsigned char 	*map;
-    int             number_last_live_player;
+	unsigned int    number_last_live_player;
     int             nbr_live;
     int             max_checks;
     int             glob_cycles;
@@ -111,5 +111,15 @@ void    start_vm(t_struct *pl);
 
 void 	init_window(void);
 void	visualization(t_struct *pl, size_t size);
+
+/*
+** support_instructions.c
+*/
+unsigned int	get_argument(t_struct *data, t_pc *p, int size);
+
+/*
+** instructions_live.c
+*/
+int		live(t_struct *data, t_pc *p);
 
 #endif
