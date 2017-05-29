@@ -6,11 +6,11 @@
 #    By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/24 16:11:32 by apoplavs          #+#    #+#              #
-#    Updated: 2017/05/05 10:51:03 by apoplavs         ###   ########.fr        #
+#    Updated: 2017/05/29 12:58:12 by dsemench         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = corevar
+NAME = corewar
 
 LEN_NAME = `printf "%s" $(NAME) | wc -c`
 
