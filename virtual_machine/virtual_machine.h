@@ -41,8 +41,7 @@ typedef struct	s_st
 	unsigned char 		*code;
 
 	int 				player_number;
-	t_pc				*first;
-    t_pc				*last;
+    int                 count_live;
 }				t_st;
 
 typedef struct	s_struct
@@ -53,8 +52,13 @@ typedef struct	s_struct
 	t_st			**players;
 
 	unsigned char 	*map;
+    int             number_last_live_player;
+    int             nbr_live;
+    int             max_checks;
     int             glob_cycles;
 	int 			iterator;//delete
+    t_pc				*first;
+    t_pc				*last;
 }				t_struct;
 
 //if exist flag "-n", flag -dump will be ignored

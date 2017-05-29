@@ -23,7 +23,7 @@ void	ft_create_players(char **names, t_struct *pl)
 	j = pl->num_pl;
 	if (!names)
 		ft_error("no players");
-	pl->players	= (t_st **)malloc(sizeof(pl->players) * (pl->num_pl));
+	pl->players	= (t_st **)malloc(sizeof(pl->players) * (pl->num_pl + 1));
 	pl->players[pl->num_pl] = NULL;
 	while (names && i < pl->num_pl)
 	{
@@ -59,7 +59,7 @@ void 	ft_valid_name(char **argv, t_struct *pl)
 	while (argv[i])
 	{
 		tmp = ft_strsplit(argv[i], '.');
-		if (ft_len_db_array(tmp) == 2 && ft_strequ(tmp[1], "cor"))
+		if (ft_len_db_array(tmp) >= 2 && ft_strequ(tmp[ft_len_db_array(tmp) - 1], "cor"))
 		{
 			names = ft_add_str_in_double(names, argv[i]);
 			pl->num_pl++;

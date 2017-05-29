@@ -70,7 +70,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
                 int xc = (tmp->pc_ptr - pl->map) / 64;
                 int yc = ((tmp->pc_ptr - pl->map) % 64)*2;
                 mvchgat(xc, yc, 1, 0, 7, NULL);
-                if ((tmp->pc_ptr - pl->map) < 4095)
+                if ((tmp->pc_ptr - pl->map) < MEM_SIZE)
                     tmp->pc_ptr++;
                 else {
                     tmp->pc_ptr = pl->map;
@@ -80,7 +80,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
               /*
                *    // отследить номер функции и установить кол-во циклов
                * if (!tmp->cycles)    //если циклы каретки 0 - выполняем функции
-                    go_to_function;  //старт функций (ap,ds)
+                    go_to_function;  //старт функций (ap,ds) - pl, caretka
                 else                 //если циклы не 0 то декрементируем и идем дальше
                     tmp->cycles--;*/
                 tmp = tmp->next;
