@@ -1,6 +1,6 @@
 #include "virtual_machine.h"
 
-void    init_pc(t_struct *pl, int i, unsigned char *ptr)
+void    init_pc(t_struct *pl, unsigned char *ptr)
 {
     t_pc *tmp;
 
@@ -10,31 +10,33 @@ void    init_pc(t_struct *pl, int i, unsigned char *ptr)
     tmp->carry = 0;
     tmp->cycles = 0;
     tmp->live = 0;
-    ft_fill_int(tmp->r, 17, -1);
-    tmp->r[1] = pl->players[i]->player_number;
-    if (pl->players[i]->last) {
-        pl->players[i]->last->next = tmp;
-        tmp->prev = pl->players[i]->last;
+    ft_fill_int(tmp->r, 17, 0);
+    if (pl->last) {
+        pl->last->next = tmp;
+        tmp->prev = pl->last;
     }
     else
         tmp->prev = NULL;
-    pl->players[i]->last = tmp;
-    if (pl->players[i]->first == NULL)
-        pl->players[i]->first = tmp;
+    pl->last = tmp;
+    if (pl->first == NULL)
+        pl->first = tmp;
     tmp->next = NULL;
 }
 
-/*
-void    delete_pc(t_struct *pl, int i, t_pc **del)
+
+void    delete_pc(t_struct *pl, t_pc **del)
 {
-    if (!(*del)->prev)
-        pl->players[i]->first = (*del)->next;
-    (*del)->next->prev = NULL;
+    if (*del == pl->last && *del == pl->first)
+    {
+        free(*del);
+        return;
+    }
+    else if (*del == pl->last && *del != pl->first)
+        (*del)->prev->next = NULL;
     else
     {
         (*del)->prev->next = (*del)->next;
         (*del)->next->prev = (*del)->prev;
     }
     free(*del);
-    *del = NULL;
-}*/
+}

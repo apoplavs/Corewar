@@ -1,6 +1,6 @@
 #include "virtual_machine.h"
 
-void    write_code_to_field(t_struct *pl, int pnb)
+void    write_code_to_field(t_struct *pl)
 {
     unsigned char   *tmp;
     int             i;
@@ -16,33 +16,6 @@ void    write_code_to_field(t_struct *pl, int pnb)
     }
 }
 
-/*int     check_live(t_struct *pl)
-{
-    int     i;
-    int     count;
-    int     flag;
-    t_pc    *tmp;
-
-    i = pl->num_pl;
-    count = pl->num_pl;
-    while (i > 0)
-    {
-        flag = 0;
-        tmp = pl->players[i - 1]->first;
-        while (tmp)
-        {
-            if (!tmp->live)
-                delete_pc();
-            else
-                flag++;
-            tmp = tmp->next;
-        }
-        if (!flag)
-            count--;
-        i--;
-    }
-    return count;
-}*/
 
 void    go_some_cycles(t_struct *pl, int cycles)
 {
@@ -95,7 +68,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
 void    start_vm(t_struct *pl)
 {
     //int i;
-    write_code_to_field(pl, 0);
+    write_code_to_field(pl);
     go_some_cycles(pl, CYCLE_TO_DIE);
     //while (check_live(pl) != 1)        //пока не выполнится условие (1 и жива) будем добавлять по CYCLE_DELTA
     //    go_some_cycles(pl, CYCLE_TO_DIE - CYCLE_DELTA);

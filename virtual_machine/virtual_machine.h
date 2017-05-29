@@ -72,6 +72,7 @@ int		main(int argv, char **argc);
 **ft_parsing_file.c
 */
 void	ft_parsing_file(t_struct *pl);
+int 	ft_interpretation(unsigned char *str, int size);
 
 /*
 **ft_search_flags.c
@@ -103,11 +104,12 @@ void 	ft_error(char *error);
 ** ik_function
 */
 void	ft_fill_int(int *arr, int size, int n);
-void    init_pc(t_struct *pl, int i, unsigned char *ptr);
+void    init_pc(t_struct *pl, unsigned char *ptr);
+void    delete_pc(t_struct *pl, t_pc **del);
 
 void    start_vm(t_struct *pl);
 
-void init_window(void);
+void 	init_window(void);
 void	visualization(t_struct *pl, size_t size);
 
 #endif

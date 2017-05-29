@@ -19,6 +19,8 @@ void 	ft_init_st(t_struct	*pl)
 	pl->num_pl = 0;
     pl->glob_cycles = 0;
 	pl->players = NULL;
+	pl->first = NULL;
+	pl->last = NULL;
 	if (!(pl->map = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
 		exit(1);
     ft_bzero(pl->map, MEM_SIZE);
@@ -29,7 +31,7 @@ int 	main(int argc, char **argv)
 {
 	t_struct	pl;
 
-    init_window();
+    //init_window();
     ft_init_st(&pl);
 	if (argc == 1)
 	{
@@ -42,6 +44,6 @@ int 	main(int argc, char **argv)
 		ft_parsing_file(&pl);
 	}
     start_vm(&pl);
-    endwin();
+    //endwin();
 	return (0);
 }

@@ -31,9 +31,8 @@ void	ft_create_players(char **names, t_struct *pl)
 		ft_printf("\n%s\n", names[i]);
 		pl->players[i]->file_name = ft_strdup(names[i]);
 		pl->players[i]->player_number = j--;
-        pl->players[i]->first = NULL;
-        pl->players[i]->last = NULL;
-		init_pc(pl , i, pl->map + ((pl->num_pl - i - 1) * (MEM_SIZE/pl->num_pl)));
+		init_pc(pl, pl->map + ((pl->num_pl - i - 1) * (MEM_SIZE/pl->num_pl)));
+		pl->last->r[1] = pl->players[i]->player_number;
 		i++;
 	}
 }
