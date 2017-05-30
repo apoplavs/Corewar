@@ -8,31 +8,39 @@ void    init_pc(t_struct *pl, unsigned char *ptr)
         exit(1);
     tmp->pc_ptr = ptr;
     tmp->carry = 0;
-    tmp->cycles = 0;
+    tmp->cycles = -1;
     tmp->live = 0;
     ft_fill_int(tmp->r, 17, 0);
-    if (pl->last) {
-        pl->last->next = tmp;
-        tmp->prev = pl->last;
+    if (pl->first) {
+        pl->first->prev = tmp;
+        tmp->next = pl->first;
     }
     else
-        tmp->prev = NULL;
-    pl->last = tmp;
-    if (pl->first == NULL)
-        pl->first = tmp;
-    tmp->next = NULL;
+        tmp->next = NULL;
+    pl->first = tmp;
+    if (pl->last == NULL)
+        pl->last = tmp;
+    tmp->prev = NULL;
 }
 
 
 void    delete_pc(t_struct *pl, t_pc **del)
 {
-    if (*del == pl->last && *del == pl->first)
+    if (*del == pl->first && *del == pl->last)
     {
-        free(*del);
-        return;
+        pl->first = NULL;
+        pl->last = NULL;
     }
-    else if (*del == pl->last && *del != pl->first)
+    else if (*del == pl->first && *del != pl->last)
+    {
+        (*del)->next->prev = NULL;
+        pl->first = (*del)->next;
+    }
+    else if (*del != pl->first && *del == pl->last)
+    {
         (*del)->prev->next = NULL;
+        pl->last = (*del)->prev;
+    }
     else
     {
         (*del)->prev->next = (*del)->next;

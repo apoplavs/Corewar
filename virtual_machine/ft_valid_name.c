@@ -17,10 +17,8 @@
 void	ft_create_players(char **names, t_struct *pl)
 {
 	int i;
-	int j;
 
 	i = 0;
-	j = pl->num_pl;
 	if (!names)
 		ft_error("no players");
 	pl->players	= (t_st **)malloc(sizeof(pl->players) * (pl->num_pl + 1));
@@ -30,7 +28,7 @@ void	ft_create_players(char **names, t_struct *pl)
 		pl->players[i] = (t_st *)malloc(sizeof(t_st));
 		ft_printf("\n%s\n", names[i]);
 		pl->players[i]->file_name = ft_strdup(names[i]);
-		pl->players[i]->player_number = j--;
+		pl->players[i]->player_number = (unsigned int)((i + 1) * -1);
 		init_pc(pl, pl->map + ((pl->num_pl - i - 1) * (MEM_SIZE/pl->num_pl)));
 		pl->last->r[1] = pl->players[i]->player_number;
 		i++;

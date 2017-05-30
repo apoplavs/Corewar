@@ -13,6 +13,7 @@
 #ifndef VIRTUAL_MACHINE_H
 # define VIRTUAL_MACHINE_H
 
+# include "../asm/asm.h"
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
 # include <stdio.h>
@@ -52,13 +53,13 @@ typedef struct	s_struct
 	t_st			**players;
 
 	unsigned char 	*map;
-	unsigned int    number_last_live_player;
+    unsigned int    number_last_live_player;
     int             nbr_live;
     int             max_checks;
     int             glob_cycles;
 	int 			iterator;//delete
-    t_pc				*first;
-    t_pc				*last;
+    t_pc			*first;
+    t_pc			*last;
 }				t_struct;
 
 //if exist flag "-n", flag -dump will be ignored
@@ -103,23 +104,14 @@ void 	ft_error(char *error);
 /*
 ** ik_function
 */
-void	ft_fill_int(int *arr, int size, int n);
+void	ft_fill_int(unsigned int *arr, int size, unsigned int n);
 void    init_pc(t_struct *pl, unsigned char *ptr);
 void    delete_pc(t_struct *pl, t_pc **del);
 
 void    start_vm(t_struct *pl);
+void    move_ptr(t_struct *pl, unsigned char **ptr, int i);
 
 void 	init_window(void);
 void	visualization(t_struct *pl, size_t size);
-
-/*
-** support_instructions.c
-*/
-unsigned int	get_argument(t_struct *data, t_pc *p, int size);
-
-/*
-** instructions_live.c
-*/
-int		live(t_struct *data, t_pc *p);
 
 #endif
