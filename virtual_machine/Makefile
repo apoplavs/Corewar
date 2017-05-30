@@ -31,6 +31,9 @@ SRC =   main.c \
 		ik_init_pc.c \
 		ik_start_pc.c \
 		ik_visualization.c \
+		instruction_live.c \
+		support_instructions.c \
+
 
 OBJ = $(SRC:.c=.o)
 

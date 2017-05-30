@@ -49,18 +49,18 @@ void    go_some_cycles(t_struct *pl, int cycles)
     i = 0;
     while (i < cycles)
     {
-        /*--------------------*/
+        /*--------------------
         move(0,0);
         //halfdelay(1);
         getch();
         refresh();
         visualization(pl, 4096);
-        /*-------------------*/
+        -------------------*/
         tmp = pl->first;
         while (tmp)
         {
             if (tmp->cycles == 0) {
-                *(tmp->pc_ptr) = 255; //go_to_function();
+                live(pl, tmp);
                 tmp->cycles = -1;
             }
             else
@@ -70,11 +70,11 @@ void    go_some_cycles(t_struct *pl, int cycles)
                 else
                     move_ptr(pl, &tmp->pc_ptr, 1);
             }
-            /*--------------------*/
+            /*--------------------
             int xc = (tmp->pc_ptr - pl->map) / 64;
             int yc = ((tmp->pc_ptr - pl->map) % 64) * 3;
             mvchgat(xc, yc, 1, 0, 7, NULL);
-            /*--------------------*/
+            --------------------*/
             tmp = tmp->next;
         }
         i++;

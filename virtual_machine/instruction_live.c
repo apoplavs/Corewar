@@ -19,7 +19,7 @@ t_st				*get_player_live(t_struct *data, unsigned int player_number)
 	i = 0;
 	while (i < data->num_pl)
 	{
-		if (player_number = data->players[i]->player_number)
+		if (player_number == data->players[i]->player_number)
 			return (data->players[i]);
 		i++;
 	}
@@ -33,7 +33,7 @@ int					live(t_struct *data, t_pc *p)
 
 	if ((arg = get_argument(data, p, 4)) == 0)
 		return (0);
-	if ((player = get_player_live(data, &arg)) != NULL)
+	if ((player = get_player_live(data, arg)) != NULL)
 	{
 		player->count_live++;
 		data->number_last_live_player = player->player_number;
