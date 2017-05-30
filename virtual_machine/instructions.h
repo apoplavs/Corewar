@@ -13,4 +13,9 @@
 #ifndef COREVAR_INSTRUCTIONS_H
 #define COREVAR_INSTRUCTIONS_H
 
+
+int		ft_choose_arg(t_struct *data, t_pc *p, unsigned char *args, int n);
+void		get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
+
+
 #endif //COREVAR_INSTRUCTIONS_H
