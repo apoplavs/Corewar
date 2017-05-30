@@ -16,6 +16,7 @@
 # include "../asm/asm.h"
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
+# include "instructions.h"
 # include <stdio.h>
 # include <errno.h>
 # include <ncurses.h>
