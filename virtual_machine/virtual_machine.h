@@ -102,6 +102,17 @@ void	ft_free_db_array(char **array);
 void 	ft_error(char *error);
 
 /*
+**instruction_live.c
+*/
+int					live(t_struct *data, t_pc *p);
+
+
+/*
+**support_instructions.c
+*/
+unsigned int	get_argument(t_struct *data, t_pc *p, int size); // зчитує аргументи для команди
+
+/*
 ** ik_function
 */
 void	ft_fill_int(unsigned int *arr, int size, unsigned int n);
