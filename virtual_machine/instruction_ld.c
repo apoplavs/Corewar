@@ -12,11 +12,38 @@
 
 #include "virtual_machine.h"
 
-int 	ld(t_struct *pl, t_pc *list, int size)
+int 	ld(t_struct *data, t_pc *p)
 {
-	unsigned int arg;
+	unsigned int 	arg;
+	unsigned int 	reg;
+	unsigned char 	*args;
+	unsigned char 	*args_len;
+	unsigned char	*point;
 
-	if ((arg = get_argument(pl, list, 4)) == 0)
+	args = (unsigned char *)ft_strnew(3);
+	args_len = (unsigned char *)ft_strnew(3);
+	change_carry(p);
+	move_ptr(data, &p->pc_ptr, 1);
+	if (!ft_choose_arg(data, p, args, 12))
 		return (0);
+	get_len_write(args, args_len, 4);
+	arg = get_argument(data, p, args_len[0]);
+	if ((reg = get_argument(data, p, args_len[1])) > 16)
+	{
+		free(args);
+		free(args_len);
+		return (0);
+	}
+	if (args[0] == T_IND)
+	{
+		point = p->pc_ptr;
+		arg = arg % IDX_MOD;
+		move_ptr(data, &p, arg);
+		arg = get_argument(data, p, args_len[0]);
+		p->pc_ptr = point;
+	}
+	p->r[reg] = arg;
+	free(args);
+	free(args_len);
 	return (1);
 }
