@@ -1,6 +1,14 @@
 
 #include "virtual_machine.h"
 
+void 			change_carry(t_pc *list)
+{
+	if (list->carry == 0)
+		list->carry = 1;
+	else
+		list->carry = 0;
+}
+
 unsigned int	get_argument(t_struct *data, t_pc *p, int size) // зчитує аргументи для команди
 {
 	unsigned int args;

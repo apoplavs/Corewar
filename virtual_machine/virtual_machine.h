@@ -111,6 +111,7 @@ int					live(t_struct *data, t_pc *p);
 **support_instructions.c
 */
 unsigned int	get_argument(t_struct *data, t_pc *p, int size); // зчитує аргументи для команди
+void 			change_carry(t_pc *list);
 
 /*
 ** ik_function
