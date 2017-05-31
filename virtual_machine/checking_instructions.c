@@ -38,7 +38,7 @@ int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n
 		args[1] = 4;
 	if (args[2] == 3)
 		args[2] = 4;
-	ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
+//	ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
 	if (!ft_check_arguments(args, n))
 		return (0);
 	move_ptr(data, p, 1);
