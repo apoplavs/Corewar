@@ -16,7 +16,7 @@
 # include "../asm/asm.h"
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
-# include "instructions.h"
+//# include "instructions.h"
 # include <stdio.h>
 # include <errno.h>
 # include <ncurses.h>
@@ -31,6 +31,7 @@ typedef struct	s_pc
 	struct s_pc		*next;
     struct s_pc		*prev;
 }				t_pc;
+
 
 
 typedef struct	s_st
@@ -63,6 +64,7 @@ typedef struct	s_struct
     t_pc			*last;
 }				t_struct;
 
+# include "instructions.h"
 //if exist flag "-n", flag -dump will be ignored
 
 /*
@@ -90,7 +92,7 @@ int		ft_len_db_array(char **array);
 /*
 **allocation_memory.c
 */
-char		**ft_add_str_in_double(char **old, char *str);
+char	**ft_add_str_in_double(char **old, char *str);
 
 /*
 **free_memory.c
@@ -103,19 +105,7 @@ void	ft_free_db_array(char **array);
 void 	ft_error(char *error);
 
 /*
-**instruction_live.c
-*/
-int					live(t_struct *data, t_pc *p);
-
-
-/*
-**support_instructions.c
-*/
-unsigned int	get_argument(t_struct *data, t_pc *p, int size); // зчитує аргументи для команди
-void 			change_carry(t_pc *list);
-
-/*
-** ik_function
+**ik_function
 */
 void	ft_fill_int(unsigned int *arr, int size, unsigned int n);
 void    init_pc(t_struct *pl, unsigned char *ptr);
