@@ -24,7 +24,7 @@ int 		ft_check_arguments(unsigned char *arg, int n)
 }
 
 
-int		ft_choose_arg(t_struct *data, unsigned char *p, unsigned char *args, int n)
+int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n)
 {
 	unsigned int tmp;
 
@@ -40,11 +40,8 @@ int		ft_choose_arg(t_struct *data, unsigned char *p, unsigned char *args, int n)
 		args[2] = 4;
 	ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
 	if (!ft_check_arguments(args, n))
-	{
-		move_ptr(data, &p, 1);  // зміщує поінтер ???
-		free(args);
 		return (0);
-	}
+	move_ptr(data, p, 1);
 	return (1);
 }
 

@@ -9,7 +9,7 @@ void 			change_carry(t_pc *list)
 		list->carry = 0;
 }
 
-unsigned int	get_argument(t_struct *data, unsigned char *p, int size) // зчитує аргументи для команди
+unsigned int	get_argument(t_struct *data, unsigned char **p, int size) // зчитує аргументи для команди
 {
 	unsigned int args;
 	int 		i;
@@ -20,8 +20,8 @@ unsigned int	get_argument(t_struct *data, unsigned char *p, int size) // зчи�
 	while (i < size)
 	{
 		args = args << 8;
-		args |= *p;//args |= function from igor move ptn;
-		move_ptr(data, &p, 1);
+		args |= **p;//args |= function from igor move ptn;
+		move_ptr(data, p, 1);
 		i++;
 	}
 	return (args);

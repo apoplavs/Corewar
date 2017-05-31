@@ -24,19 +24,19 @@ int 				lld(t_struct *data, t_pc *p)
 	args_len = (unsigned char *)ft_strnew(3);
 	change_carry(p);
 	move_ptr(data, &p->pc_ptr, 1);
-	if (!ft_choose_arg(data, p, args, 12))
-		return (0);
+	point = p->pc_ptr;
+	if (!ft_choose_arg(data, &point, args, 12))
+		return (free_for_functions(args, args_len, 0));
 	get_len_write(args, args_len, 4);
-	arg = get_argument(data, p, args_len[0]);
-	if ((reg = get_argument(data, p, args_len[1])) > 16)
+	arg = get_argument(data, &point, args_len[0]);
+	if ((reg = get_argument(data, &point, args_len[1])) > 16)
 		return (free_for_functions(args, args_len, 0));
 	if (args[0] == T_IND)
 	{
-		point = p->pc_ptr;
-		move_ptr(data, &p->pc_ptr, arg);
-		arg = get_argument(data, p, args_len[0]);
-		p->pc_ptr = point;
+		move_ptr(data, &point, arg);
+		arg = get_argument(data, &point, args_len[0]);
 	}
 	p->r[reg] = arg;
+	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
 }

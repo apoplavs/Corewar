@@ -13,17 +13,14 @@ int 	add(t_struct *data, t_pc *p)
 	change_carry(p);
 	move_ptr(data, &p->pc_ptr, 1);
 	point = p->pc_ptr;
-	if (!ft_choose_arg(data, p, args, 3))
-		return (0);
-	get_len_write(args, args_len, 0);
-	if (((reg[0] = get_argument(data, p, args_len[0])) > 16)
-		|| ((reg[1] = get_argument(data, p, args_len[1])) > 16)
-		|| ((reg[3] = get_argument(data, p, args_len[2])) > 16))
-	{
-		p->pc_ptr = point;
+	if (!ft_choose_arg(data, &point, args, 3))
 		return (free_for_functions(args, args_len, 0));
-	}
+	get_len_write(args, args_len, 0);
+	if (((reg[0] = get_argument(data, &point, args_len[0])) > 16)
+		|| ((reg[1] = get_argument(data, &point, args_len[1])) > 16)
+		|| ((reg[3] = get_argument(data, &point, args_len[2])) > 16))
+		return (free_for_functions(args, args_len, 0));
 	p->r[reg[2]] = p->r[reg[0]] + p->r[reg[1]];
-
+	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
 }
