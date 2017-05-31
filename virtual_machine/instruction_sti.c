@@ -13,28 +13,25 @@ int 	sti(t_struct *data, t_pc *p)
 	args = (unsigned char *)ft_strnew(3);
 	args_len = (unsigned char *)ft_strnew(3);
 	move_ptr(data, &p->pc_ptr, 1);
-	if (!ft_choose_arg(data, p, args, 10))
+	point = p->pc_ptr;
+	if (!ft_choose_arg(data, &point, args, 10))
 		return (0);
 	get_len_write(args, args_len, 2);
-	if (((reg = get_argument(data, p, args_len[0])) > 16) || (args[1] == T_REG
-			&& (arg[0] = get_argument(data, p, args_len[1])) > 16) || (args[2] == T_REG
-			&& (arg[1] = get_argument(data, p, args_len[2])) > 16))
+	if (((reg = get_argument(data, &point, args_len[0])) > 16) || (args[1] == T_REG
+			&& (arg[0] = get_argument(data, &point, args_len[1])) > 16) || (args[2] == T_REG
+			&& (arg[1] = get_argument(data, &point, args_len[2])) > 16))
 		return (free_for_functions(args, args_len, 0));
 	if (args[1] == T_IND)
 	{
-		point = p->pc_ptr;
-		move_ptr(data, &p->pc_ptr, arg[0]);
-		arg[0] = get_argument(data, p, args_len[0]);
-		p->pc_ptr = point;
+		move_ptr(data, &point, arg[0]);
+		arg[0] = get_argument(data, &point, args_len[0]);
 	}
 	else if (args[1] == T_REG)
 		arg[0] = p->r[arg[0]];
 	if (args[2] == T_REG)
 		arg[1] = p->r[arg[1]];
-	point = p->pc_ptr;
-	move_ptr(data, &p->pc_ptr, arg[0] + arg[1]);
-	set_arguments(data, p, reg);
-	p->pc_ptr = point;
-
+	move_ptr(data, &point, arg[0] + arg[1]);
+	set_arguments(data, &point, reg);
+	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
 }
