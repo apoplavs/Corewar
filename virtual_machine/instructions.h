@@ -44,7 +44,12 @@ int 		add(t_struct *data, t_pc *p);
 /*
 **instruction_sub.c
 */
-int 		add(t_struct *data, t_pc *p);
+int 		sub(t_struct *data, t_pc *p);
+
+/*
+**instruction_sti.c
+*/
+int 		sti(t_struct *data, t_pc *p);
 
 /*
 **instruction_lld.c

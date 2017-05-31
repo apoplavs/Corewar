@@ -31,11 +31,16 @@ SRC =   main.c \
 		ik_init_pc.c \
 		ik_start_pc.c \
 		ik_visualization.c \
+		ik_init_function.c \
 		support_instructions.c \
 		checking_instructions.c \
 		instruction_live.c \
 		instruction_ld.c \
+		instruction_st.c \
+		instruction_add.c \
+		instruction_sub.c \
 		instruction_lld.c \
+		instruction_sti.c \
 
 
 OBJ = $(SRC:.c=.o)

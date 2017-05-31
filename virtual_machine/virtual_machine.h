@@ -16,7 +16,6 @@
 # include "../asm/asm.h"
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
-//# include "instructions.h"
 # include <stdio.h>
 # include <errno.h>
 # include <ncurses.h>
@@ -63,6 +62,8 @@ typedef struct	s_struct
     t_pc			*first;
     t_pc			*last;
 }				t_struct;
+
+int             (*g_fun[17])(t_struct *pl, t_pc *current_pc);
 
 # include "instructions.h"
 //if exist flag "-n", flag -dump will be ignored
@@ -118,5 +119,7 @@ void    move_ptr(t_struct *pl, unsigned char **ptr, int i);
 
 void 	init_window(void);
 void	visualization(t_struct *pl, size_t size);
+
+void    init_function(void);
 
 #endif

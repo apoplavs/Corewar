@@ -51,7 +51,7 @@ void 	ft_init_st(t_struct	*pl)
     pl->glob_cycles = CYCLE_TO_DIE;
     pl->number_last_live_player = 0;
     pl->nbr_live = 0;
-    pl->max_checks = 0;
+    pl->max_checks = MAX_CHECKS;
 	pl->players = NULL;
 	pl->first = NULL;
 	pl->last = NULL;
@@ -65,8 +65,9 @@ int 	main(int argc, char **argv)
 {
 	t_struct	pl;
 
+	init_function();
     g_tab = init_tab();
-    //init_window();
+    init_window();
     ft_init_st(&pl);
 	if (argc == 1)
 	{
@@ -79,6 +80,6 @@ int 	main(int argc, char **argv)
 		ft_parsing_file(&pl);
 	}
     start_vm(&pl);
-    //endwin();
+    endwin();
 	return (0);
 }

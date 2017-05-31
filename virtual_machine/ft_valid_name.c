@@ -26,11 +26,11 @@ void	ft_create_players(char **names, t_struct *pl)
 	while (names && i < pl->num_pl)
 	{
 		pl->players[i] = (t_st *)malloc(sizeof(t_st));
-		ft_printf("\n%s\n", names[i]);
 		pl->players[i]->file_name = ft_strdup(names[i]);
 		pl->players[i]->player_number = (unsigned int)((i + 1) * -1);
+        pl->number_last_live_player = pl->players[i]->player_number;
 		init_pc(pl, pl->map + ((pl->num_pl - i - 1) * (MEM_SIZE/pl->num_pl)));
-		pl->last->r[1] = pl->players[i]->player_number;
+        pl->last->r[1] = pl->players[i]->player_number;
 		pl->players[i]->count_live = 0;
 		i++;
 	}
