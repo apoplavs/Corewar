@@ -26,19 +26,22 @@ int 		ft_check_arguments(unsigned char *arg, int n)
 
 int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n)
 {
-	unsigned int tmp;
+	unsigned char tmp;
 
-	tmp = (unsigned int)p;
-	args[0] = (unsigned char)tmp >> 6;
-	args[1] = (unsigned char)tmp >> 4;
-	args[2] = (unsigned char)tmp >> 2;
+	tmp = **p;
+	args[0] = tmp >> 6;
+	tmp = tmp << 2;
+	args[1] = tmp >> 6;
+	tmp = **p;
+	tmp = tmp << 4;
+	args[2] = tmp >> 6;
 	if (args[0] == 3)
 		args[0] = 4;
 	if (args[1] == 3)
 		args[1] = 4;
 	if (args[2] == 3)
 		args[2] = 4;
-//	ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
+	//ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
 	if (!ft_check_arguments(args, n))
 		return (0);
 	move_ptr(data, p, 1);

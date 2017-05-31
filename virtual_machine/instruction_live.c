@@ -42,7 +42,7 @@ int					live(t_struct *data, t_pc *p)
 	}
 	data->nbr_live++;
 	p->live++;
-	move_ptr(data, &p->pc_ptr, 1);
+	move_ptr(data, &p->pc_ptr, 5);
 	return (1);
 }
 
