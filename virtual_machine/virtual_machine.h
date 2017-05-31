@@ -58,9 +58,11 @@ typedef struct	s_struct
     int             nbr_live;
     int             max_checks;
     int             glob_cycles;
-	int 			iterator;//delete
     t_pc			*first;
     t_pc			*last;
+
+	int 			iterator;//delete
+	int 			v;
 }				t_struct;
 
 int             (*g_fun[17])(t_struct *pl, t_pc *current_pc);

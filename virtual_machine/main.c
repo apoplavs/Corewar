@@ -59,6 +59,7 @@ void 	ft_init_st(t_struct	*pl)
 		exit(1);
     ft_bzero(pl->map, MEM_SIZE);
     pl->iterator = 1;//delete
+	pl->v = 0;
 }
 
 int 	main(int argc, char **argv)
@@ -67,8 +68,9 @@ int 	main(int argc, char **argv)
 
 	init_function();
     g_tab = init_tab();
-	init_window();
-    ft_init_st(&pl);
+	ft_init_st(&pl);
+	if (pl.v)
+		init_window();
 	if (argc == 1)
 	{
 		//output info how use exec
@@ -80,6 +82,7 @@ int 	main(int argc, char **argv)
 		ft_parsing_file(&pl);
 	}
     start_vm(&pl);
-    endwin();
+	if (pl.v)
+    	endwin();
 	return (0);
 }
