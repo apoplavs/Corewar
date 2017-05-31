@@ -59,7 +59,7 @@ void 	ft_init_st(t_struct	*pl)
 		exit(1);
     ft_bzero(pl->map, MEM_SIZE);
     pl->iterator = 1;//delete
-	pl->v = 0;
+	pl->v = 1;
 }
 
 int 	main(int argc, char **argv)

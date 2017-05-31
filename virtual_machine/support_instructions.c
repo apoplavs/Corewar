@@ -47,16 +47,31 @@ void		get_len_write(unsigned char *args, unsigned char *args_len, int len_dir)
 void		set_arguments(unsigned char *p, unsigned int reg)
 {
 	unsigned int tmp;
-	int move;
-	int i;
-
-	i = 0;
-	move = 0;
-	while (i < 4)
-	{
-		tmp = reg << move;
-		p[i] = (unsigned char)tmp >> 24;
-		move += 8;
-		i++;
-	}
+//	int move;
+//	int i;
+//
+//	i = 0;
+//	move = 0;
+//	while (i < 4)
+//	{
+//		tmp = reg << move;
+//		p[i] = (unsigned char)tmp >> 24;
+////		printf("%s", p);
+//		move += 8;
+//		i++;
+//	}
+//	printf("[%d]", reg);
+	tmp = reg;
+	p[0] = tmp >> 24;
+//	printf("[%d]", p[0]);
+	tmp = tmp << 8;
+//	printf("[%d]", tmp);
+	p[1] = tmp >> 24;
+//	printf("[%d]", tmp);
+	tmp = reg;
+	tmp = tmp << 16;
+	p[2] = tmp >> 24;
+	tmp = reg;
+	tmp = tmp << 24;
+	p[3] = tmp >> 24;
 }

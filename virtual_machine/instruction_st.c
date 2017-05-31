@@ -32,6 +32,7 @@ int 	st(t_struct *data, t_pc *p)
 		return (free_for_functions(args, args_len, 0));
 	if (args[1] == T_IND)
 	{
+//		printf("--\n");
 		point = p->pc_ptr - 1;
 		arg = arg % IDX_MOD;
 		move_ptr(data, &point, arg);
