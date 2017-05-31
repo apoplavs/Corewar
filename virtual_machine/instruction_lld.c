@@ -33,6 +33,7 @@ int 				lld(t_struct *data, t_pc *p)
 		return (free_for_functions(args, args_len, 0));
 	if (args[0] == T_IND)
 	{
+		point = p->pc_ptr - 1;
 		move_ptr(data, &point, arg);
 		arg = get_argument(data, &point, args_len[0]);
 	}
