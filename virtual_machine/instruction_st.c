@@ -34,7 +34,9 @@ int 	st(t_struct *data, t_pc *p)
 	{
 //		printf("--\n");
 		point = p->pc_ptr - 1;
+//		printf("[%x]\n", arg);
 		arg = arg % IDX_MOD;
+		printf("[%d]\n", arg);
 		move_ptr(data, &point, arg);
 		set_arguments(point, reg);
 	}
