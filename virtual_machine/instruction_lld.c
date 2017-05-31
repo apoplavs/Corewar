@@ -29,11 +29,7 @@ int 				lld(t_struct *data, t_pc *p)
 	get_len_write(args, args_len, 4);
 	arg = get_argument(data, p, args_len[0]);
 	if ((reg = get_argument(data, p, args_len[1])) > 16)
-	{
-		free(args);
-		free(args_len);
-		return (0);
-	}
+		return (free_for_functions(args, args_len, 0));
 	if (args[0] == T_IND)
 	{
 		point = p->pc_ptr;
@@ -42,7 +38,5 @@ int 				lld(t_struct *data, t_pc *p)
 		p->pc_ptr = point;
 	}
 	p->r[reg] = arg;
-	free(args);
-	free(args_len);
-	return (1);
+	return (free_for_functions(args, args_len, 1));
 }

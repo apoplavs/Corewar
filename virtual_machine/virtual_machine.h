@@ -98,6 +98,8 @@ char	**ft_add_str_in_double(char **old, char *str);
 **free_memory.c
 */
 void	ft_free_db_array(char **array);
+int 	free_for_functions(void *old_1, void *old_2, int res);
+
 
 /*
 **ft_error.c

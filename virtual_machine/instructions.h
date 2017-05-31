@@ -18,7 +18,7 @@
 /*
 **checking_instructions.c
 */
-int			ft_choose_arg(t_struct *data, t_pc *p, unsigned char *args, int n);
+int		ft_choose_arg(t_struct *data, unsigned char *p, unsigned char *args, int n);
 void		get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
 
 
@@ -41,7 +41,8 @@ int					live(t_struct *data, t_pc *p);
 **support_instructions.c
 */
 void			get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
-unsigned int	get_argument(t_struct *data, t_pc *p, int size); // зчитує аргументи для команди
+unsigned int	get_argument(t_struct *data, unsigned char *p, int size); // зчитує аргументи для команди
 void 			change_carry(t_pc *list);
+void			set_arguments(unsigned char *p, unsigned int reg);
 
 #endif //COREVAR_INSTRUCTIONS_H

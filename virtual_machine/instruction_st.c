@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_ld.c                                   :+:      :+:    :+:   */
+/*   instruction_st.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/30 17:23:44 by dsemench          #+#    #+#             */
-/*   Updated: 2017/05/30 17:23:46 by dsemench         ###   ########.fr       */
+/*   Created: 2017/05/31 09:54:36 by apoplavs          #+#    #+#             */
+/*   Updated: 2017/05/31 09:54:43 by apoplavs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "virtual_machine.h"
 
-int 	ld(t_struct *data, t_pc *p)
+int 	st(t_struct *data, t_pc *p)
 {
 	unsigned int 	arg;
 	unsigned int 	reg;
@@ -20,26 +20,24 @@ int 	ld(t_struct *data, t_pc *p)
 	unsigned char 	*args_len;
 	unsigned char	*point;
 
-	move_ptr(data, &p->pc_ptr, 1);
-	point = p->pc_ptr;
 	args = (unsigned char *)ft_strnew(3);
 	args_len = (unsigned char *)ft_strnew(3);
-	change_carry(p);
+	move_ptr(data, &p->pc_ptr, 1);
 	if (!ft_choose_arg(data, p, args, 2))
 		return (0);
-	get_len_write(args, args_len, 4);
-	arg = get_argument(data, p, args_len[0]);
-	if ((reg = get_argument(data, p, args_len[1])) > 16)
+	get_len_write(args, args_len, 0);
+	if (((reg = get_argument(data, p, args_len[0])) > 16) || (args[1] == T_REG
+			&& (arg = get_argument(data, p, args_len[1])) > 16))
 		return (free_for_functions(args, args_len, 0));
-	if (args[0] == T_IND)
+	if (args[1] == T_IND)
 	{
 		point = p->pc_ptr;
 		arg = arg % IDX_MOD;
 		move_ptr(data, &p->pc_ptr, arg);
-		arg = get_argument(data, p, args_len[0]);
+		set_arguments(data, p, reg);
 		p->pc_ptr = point;
 	}
-	p->r[reg] = arg;
-
+	else
+		p->r[arg] = p->r[reg];
 	return (free_for_functions(args, args_len, 1));
 }
