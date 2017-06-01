@@ -22,10 +22,9 @@ int			or(t_struct *data, t_pc *p)
 
 	args = (unsigned char *)ft_strnew(3);
 	args_len = (unsigned char *)ft_strnew(3);
-	change_carry(p);
 	move_ptr(data, &p->pc_ptr, 1);
 	point = p->pc_ptr;
-	if (!ft_choose_arg(data, &point, args, 5))
+	if (!ft_choose_arg(data, &point, args, 6))
 		return (free_for_functions(args, args_len, 0));
 	get_len_write(args, args_len, 4);
 	if (((arg[0] = get_argument(data, &point, args_len[1])) > 16 && args[1] == T_REG)
@@ -38,5 +37,6 @@ int			or(t_struct *data, t_pc *p)
 	ft_for_and_or_xor(data, p, &tmp_arg, args);
 	p->r[tmp_arg[2]] = tmp_arg[0] | tmp_arg[1];
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
+	change_carry(p, p->r[tmp_arg[2]]);
 	return (free_for_functions(args, args_len, 1));
 }
