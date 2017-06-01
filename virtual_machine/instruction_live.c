@@ -31,7 +31,8 @@ int					live(t_struct *data, t_pc *p)
 	unsigned int 	arg;
 	unsigned char	*point;
 	t_st			*player;
-
+	
+	move_ptr(data, &p->pc_ptr, 1);
 	point = p->pc_ptr;
 	if ((arg = get_argument(data, &point, 4)) == 0)
 		return (0);
@@ -42,7 +43,7 @@ int					live(t_struct *data, t_pc *p)
 	}
 	data->nbr_live++;
 	p->live++;
-	move_ptr(data, &p->pc_ptr, 5);
+	move_ptr(data, &p->pc_ptr, 4);
 	return (1);
 }
 
