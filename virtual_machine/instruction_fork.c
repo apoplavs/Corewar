@@ -15,15 +15,16 @@
 t_pc	*create_pc_fork_lfork(t_struct *data, t_pc *p, unsigned char *point)
 {
 	t_pc	*p_new;
+	int i;
 
 	p_new = p;
 	init_pc(data, point);
-	while (p_new->prev)
-		p_new = p_new->prev;
-//	p_new->r = p;//???
-	p_new->live = p->live;//????
-	p_new->cycles = p->cycles;//????
-	p_new->carry = p->carry;
+	while (i <= 16)
+		data->first->r[i] = p->r[i];
+	data->first->owner = p->owner;
+//	data->first->live = p->live;//????
+//	data->first->cycles = p->cycles;//????
+	data->first->carry = p->carry;
 	return (p_new);
 }
 
