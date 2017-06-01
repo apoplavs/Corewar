@@ -48,6 +48,22 @@ int 		add(t_struct *data, t_pc *p);
 int 		sub(t_struct *data, t_pc *p);
 
 /*
+**instruction_and.c
+*/
+void		ft_for_and_or_xor(t_struct *data, t_pc *p, long int **arg, unsigned char *args);
+int			and(t_struct *data, t_pc *p);
+
+/*
+**instruction_or.c
+*/
+int			or(t_struct *data, t_pc *p);
+
+/*
+**instruction_xor.c
+*/
+int			xor(t_struct *data, t_pc *p);
+
+/*
 **instruction_sti.c
 */
 int 		sti(t_struct *data, t_pc *p);
