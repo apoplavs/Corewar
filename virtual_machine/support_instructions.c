@@ -1,9 +1,9 @@
 
 #include "virtual_machine.h"
 
-void 			change_carry(t_pc *list)
+void 			change_carry(t_pc *list, unsigned int value)
 {
-	if (list->carry == 0)
+	if (value == 0)
 		list->carry = 1;
 	else
 		list->carry = 0;

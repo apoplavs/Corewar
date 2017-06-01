@@ -48,21 +48,30 @@ int 		add(t_struct *data, t_pc *p);
 int 		sub(t_struct *data, t_pc *p);
 
 /*
+**instruction_lld.c
+*/
+int 		lld(t_struct *data, t_pc *p);
+
+/*
 **instruction_sti.c
 */
 int 		sti(t_struct *data, t_pc *p);
 
 /*
-**instruction_lld.c
+**instruction_zjmp.c
 */
-int 		lld(t_struct *data, t_pc *p);
+int 		zjmp(t_struct *data, t_pc *p);
+/*
+**instruction_ldi.c
+*/
+int 	ldi(t_struct *data, t_pc *p);
 
 /*
 **support_instructions.c
 */
 void			get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
 unsigned int	get_argument(t_struct *data, unsigned char **p, int size); // зчитує аргументи для команди
-void 			change_carry(t_pc *list);
+void 			change_carry(t_pc *list, unsigned int value);
 void			set_arguments(unsigned char *p, unsigned int reg);
 
 #endif //COREVAR_INSTRUCTIONS_H
