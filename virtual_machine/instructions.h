@@ -81,6 +81,19 @@ int 		zjmp(t_struct *data, t_pc *p);
 */
 int 	ldi(t_struct *data, t_pc *p);
 
+
+
+
+
+/*
+**instruction_fork.c
+*/
+int 		fork(t_struct *data, t_pc *p);
+/*
+**instruction_lldi.c
+*/
+int 	lldi(t_struct *data, t_pc *p);
+
 /*
 **support_instructions.c
 */

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_ldi.c                                  :+:      :+:    :+:   */
+/*   instruction_lldi.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/01 16:08:07 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/01 16:08:13 by apoplavs         ###   ########.fr       */
+/*   Created: 2017/06/01 17:30:04 by apoplavs          #+#    #+#             */
+/*   Updated: 2017/06/01 17:30:06 by apoplavs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	overwrite_t_ind(long int *arg, t_struct *data, unsigned char *point)
 {
 	*arg = cast_if_negative(*arg);
-	*arg = *arg % IDX_MOD;
 	move_ptr(data, &point, *arg);
 	*arg = get_argument(data, &point, 4);
 }
@@ -49,5 +48,6 @@ int 	ldi(t_struct *data, t_pc *p)
 	arg[0] = get_argument(data, &point, 4);
 	p->r[arg[2]] = arg[0];
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
+	change_carry(p, p->r[arg[2]]);
 	return (free_for_functions(args, args_len, 1));
 }
