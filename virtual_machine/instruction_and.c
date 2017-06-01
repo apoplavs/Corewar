@@ -21,6 +21,7 @@ void	ft_for_and_or_xor(t_struct *data, t_pc *p, long int **arg, unsigned char *a
 	{
 		//		point = p->pc_ptr - 1;
 		*arg[0] = cast_if_negative(*arg[0]);
+		*arg[0] = *arg[0] % IDX_MOD;
 		move_ptr(data, &point, *arg[0]);
 		*arg[0] = get_argument(data, &point, 4);
 	}
@@ -30,9 +31,12 @@ void	ft_for_and_or_xor(t_struct *data, t_pc *p, long int **arg, unsigned char *a
 	{
 		//		point = p->pc_ptr - 1;//обнулять поинтер не нужно?????
 		*arg[1] = cast_if_negative(*arg[1]);
+		*arg[1] = *arg[1] % IDX_MOD;
 		move_ptr(data, &point, *arg[1]);
 		*arg[1] = get_argument(data, &point, 4);
 	}
+	else if (args[2] == T_REG)
+		*arg[1] = p->r[*arg[1]];
 }
 
 int			and(t_struct *data, t_pc *p)

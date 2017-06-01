@@ -25,6 +25,7 @@ int 	sti(t_struct *data, t_pc *p)
 	{
 		point = p->pc_ptr - 1;
 		arg[0] = cast_if_negative(arg[0]);
+		arg[0] = arg[0] % IDX_MOD;
 		move_ptr(data, &point, arg[0]);
 		arg[0] = get_argument(data, &point, 4);
 	}
