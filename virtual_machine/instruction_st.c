@@ -14,7 +14,7 @@
 
 int 	st(t_struct *data, t_pc *p)
 {
-	unsigned int 	arg;
+	long int		arg;
 	unsigned int 	reg;
 	unsigned char 	*args;
 	unsigned char 	*args_len;
@@ -35,8 +35,9 @@ int 	st(t_struct *data, t_pc *p)
 //		printf("--\n");
 		point = p->pc_ptr - 1;
 //		printf("[%x]\n", arg);
+		arg = cast_if_negative(arg);
 		arg = arg % IDX_MOD;
-//		printf("[%d][%d]\n", arg), reg;
+		//printf("[%d][%d]\n", arg, (short)arg);
 		move_ptr(data, &point, arg);
 		set_arguments(point, p->r[reg]);
 	}

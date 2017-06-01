@@ -20,6 +20,7 @@
 */
 int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n);
 void	get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
+long int	cast_if_negative(long int arg);
 
 
 /*
