@@ -88,6 +88,7 @@ int 	ldi(t_struct *data, t_pc *p);
 /*
 **instruction_fork.c
 */
+t_pc	*create_pc_fork_lfork(t_struct *data, t_pc *p, unsigned char *point);
 int 		fork(t_struct *data, t_pc *p);
 /*
 **instruction_lldi.c
