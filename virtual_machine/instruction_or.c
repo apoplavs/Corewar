@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_and.c                                  :+:      :+:    :+:   */
+/*   instruction_or.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,7 @@
 
 #include "virtual_machine.h"
 
-void	ft_for_and_or_xor(t_struct *data, t_pc *p, long int **arg, unsigned char *args)
-{
-	unsigned char	*point;
-
-	point = p->pc_ptr - 1;
-	if (args[1] == T_IND)
-	{
-		//		point = p->pc_ptr - 1;
-		*arg[0] = cast_if_negative(*arg[0]);
-		move_ptr(data, &point, *arg[0]);
-		*arg[0] = get_argument(data, &point, 4);
-	}
-	else if (args[1] == T_REG)
-		*arg[0] = p->r[*arg[0]];
-	if (args[2] == T_IND)
-	{
-		//		point = p->pc_ptr - 1;//обнулять поинтер не нужно?????
-		*arg[1] = cast_if_negative(*arg[1]);
-		move_ptr(data, &point, *arg[1]);
-		*arg[1] = get_argument(data, &point, 4);
-	}
-}
-
-int			and(t_struct *data, t_pc *p)
+int			or(t_struct *data, t_pc *p)
 {
 	long int		arg[3];
 	long int		*tmp_arg;
@@ -59,7 +36,7 @@ int			and(t_struct *data, t_pc *p)
 //	arg = ft_for_and_or_xor(data, p, arg, args);
 	tmp_arg = arg;
 	ft_for_and_or_xor(data, p, &tmp_arg, args);
-	p->r[tmp_arg[2]] = tmp_arg[0] & tmp_arg[1];
+	p->r[tmp_arg[2]] = tmp_arg[0] | tmp_arg[1];
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
 }
