@@ -19,14 +19,10 @@ unsigned int	get_argument(t_struct *data, unsigned char **p, int size) // зчи
 	while (i < size)
 	{
 		args = args << 8;
-		args |= **p;//args |= function from igor move ptn;
+		args |= **p;
 		move_ptr(data, p, 1);
 		i++;
 	}
-//-------
-//if ()
-//	move_ptr(data, p, size);
-//-------
 	return (args);
 }
 
