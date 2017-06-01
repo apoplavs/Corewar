@@ -3,7 +3,7 @@
 
 int 	add(t_struct *data, t_pc *p)
 {
-	unsigned int 	reg[3];
+	long int 		reg[3];
 	unsigned char 	*args;
 	unsigned char 	*args_len;
 	unsigned char	*point;
