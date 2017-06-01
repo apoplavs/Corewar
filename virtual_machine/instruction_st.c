@@ -27,8 +27,8 @@ int 	st(t_struct *data, t_pc *p)
 	if (!ft_choose_arg(data, &point, args, 2))
 		return (free_for_functions(args, args_len, 0));
 	get_len_write(args, args_len, 0);
-	if (((reg = get_argument(data, &point, args_len[0])) > 16) || (args[1] == T_REG
-			&& (arg = get_argument(data, &point, args_len[1])) > 16))
+	if (((reg = get_argument(data, &point, args_len[0])) > 16) ||
+			((arg = get_argument(data, &point, args_len[1])) > 16 && args[1] == T_REG))
 		return (free_for_functions(args, args_len, 0));
 	if (args[1] == T_IND)
 	{
@@ -36,9 +36,9 @@ int 	st(t_struct *data, t_pc *p)
 		point = p->pc_ptr - 1;
 //		printf("[%x]\n", arg);
 		arg = arg % IDX_MOD;
-		printf("[%d]\n", arg);
+//		printf("[%d][%d]\n", arg), reg;
 		move_ptr(data, &point, arg);
-		set_arguments(point, reg);
+		set_arguments(point, p->r[reg]);
 	}
 	else
 		p->r[arg] = p->r[reg];
