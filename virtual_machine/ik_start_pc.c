@@ -59,7 +59,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
     int     i;
     t_pc    *tmp;
     int ch = 0;
-    int flag = 1;
+    int flag = 0;
 
     i = 0;
     while (i < cycles)

@@ -58,7 +58,7 @@ FLAGS = -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(LIBFT) $(OBJ)
 	@$(CC) -o $(NAME) $(OBJ) $(LIBFT) -lncurses
 	@echo "\r\033[48;5;15;38;5;25m✅  MADE $(NAME)  \033[0m\033[K"
 	@make clean
