@@ -58,7 +58,10 @@ void 	ft_init_st(t_struct	*pl)
 	if (!(pl->map = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
 		exit(1);
     ft_bzero(pl->map, MEM_SIZE);
-    pl->iterator = 1;//delete
+	if (!(pl->color = (unsigned char*)malloc(sizeof(unsigned char) * MEM_SIZE)))
+		exit(1);
+	ft_bchar(pl->color, MEM_SIZE, 8);
+    pl->iterator = 0;//delete
 	pl->v = 1;
 }
 

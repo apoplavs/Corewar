@@ -2,4 +2,6 @@
 .comment	"Dimon-granata"
 	
 label:
-	live %-2
+	ld %255, r2
+    st r2, 20
+    live %-2

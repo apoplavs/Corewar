@@ -1,12 +1,12 @@
 
 #include "virtual_machine.h"
 
-void 			change_carry(t_pc *list, unsigned int value)
+void change_carry(t_pc *list, unsigned int value)
 {
-	if (value == 0)
-		list->carry = 1;
-	else
-		list->carry = 0;
+    if (value == 0)
+        list->carry = 1;
+    else
+        list->carry = 0;
 }
 
 unsigned int	get_argument(t_struct *data, unsigned char **p, int size) // зчитує аргументи для команди
@@ -43,7 +43,7 @@ void		get_len_write(unsigned char *args, unsigned char *args_len, int len_dir)
 	}
 }
 
-void		set_arguments(unsigned char *p, unsigned int reg)
+void set_arguments(t_struct *pl, unsigned int reg, unsigned char *p, int color)
 {
 	unsigned int tmp;
 	int move;
@@ -58,5 +58,7 @@ void		set_arguments(unsigned char *p, unsigned int reg)
 		move += 8;
 		i++;
 	}
+	if (pl->v)
+		set_color(pl, p, color);
 }
 

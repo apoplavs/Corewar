@@ -35,7 +35,7 @@ int 	sti(t_struct *data, t_pc *p)
 		arg[1] = p->r[arg[1]];
 	point = p->pc_ptr - 1;
 	move_ptr(data, &point, arg[0] + arg[1]);
-	set_arguments(point, p->r[reg]);
+    set_arguments(data, p->r[reg], point, p->owner + 1);
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
 }

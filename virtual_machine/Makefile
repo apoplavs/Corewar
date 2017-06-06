@@ -39,19 +39,26 @@ SRC =   main.c \
 		instruction_st.c \
 		instruction_add.c \
 		instruction_sub.c \
-		instruction_lld.c \
+		instruction_and.c \
+		instruction_or.c \
+		instruction_xor.c \
+		instruction_zjmp.c \
+		instruction_ldi.c \
 		instruction_sti.c \
-
+		instruction_fork.c \
+		instruction_lld.c \
+		instruction_lldi.c \
+		instruction_lfork.c \
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = ../libftprintf/get_next_line.h virtual_machine.h ../op.h
+HEADERS = ../libftprintf/get_next_line.h virtual_machine.h ../op.h instructions.h
 
 FLAGS = -Wall -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ)
 	@$(CC) -o $(NAME) $(OBJ) $(LIBFT) -lncurses
 	@echo "\r\033[48;5;15;38;5;25m✅  MADE $(NAME)  \033[0m\033[K"
 	@make clean

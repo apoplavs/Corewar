@@ -12,14 +12,14 @@
 
 #include "virtual_machine.h"
 
-void	overwrite_t_ind(long int *arg, t_struct *data, unsigned char *point)
+void	overwrite_t_ind_lldi(long int *arg, t_struct *data, unsigned char *point)
 {
 	*arg = cast_if_negative(*arg);
 	move_ptr(data, &point, *arg);
 	*arg = get_argument(data, &point, 4);
 }
 
-int 	ldi(t_struct *data, t_pc *p)
+int 	lldi(t_struct *data, t_pc *p)
 {
 	long int 		arg[3];
 	unsigned char 	*args;
@@ -38,7 +38,7 @@ int 	ldi(t_struct *data, t_pc *p)
 		((arg[1] = get_argument(data, &point, args_len[2]) > 16 && args[2] == T_REG)))
 		return (free_for_functions(args, args_len, 0));
 	if (args[0] == T_IND)
-		overwrite_t_ind(&arg[0], data, p->pc_ptr - 1);
+		overwrite_t_ind_lldi(&arg[0], data, p->pc_ptr - 1);
 	else if (args[0] == T_REG)
 		arg[0] = p->r[arg[0]];
 	if (args[1] == T_REG)

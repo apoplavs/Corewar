@@ -79,7 +79,7 @@ int 		zjmp(t_struct *data, t_pc *p);
 /*
 **instruction_ldi.c
 */
-int 	ldi(t_struct *data, t_pc *p);
+int 	    ldi(t_struct *data, t_pc *p);
 
 
 
@@ -88,19 +88,21 @@ int 	ldi(t_struct *data, t_pc *p);
 /*
 **instruction_fork.c
 */
-t_pc	*create_pc_fork_lfork(t_struct *data, t_pc *p, unsigned char *point);
-int 		fork(t_struct *data, t_pc *p);
+void	create_pc_fork_lfork(t_struct *data, t_pc *p, unsigned char *point);
+int 		my_fork(t_struct *data, t_pc *p);
 /*
 **instruction_lldi.c
 */
 int 	lldi(t_struct *data, t_pc *p);
 
+
+int 	lfork(t_struct *data, t_pc *p);
 /*
 **support_instructions.c
 */
 void			get_len_write(unsigned char *args, unsigned char *args_len, int len_dir);
 unsigned int	get_argument(t_struct *data, unsigned char **p, int size); // зчитує аргументи для команди
-void 			change_carry(t_pc *list, unsigned int value);
-void			set_arguments(unsigned char *p, unsigned int reg);
+void            change_carry(t_pc *list, unsigned int value);
+void            set_arguments(t_struct *data, unsigned int reg, unsigned char *p, int color);
 
 #endif //COREVAR_INSTRUCTIONS_H

@@ -36,7 +36,7 @@ int 	st(t_struct *data, t_pc *p)
 		arg = cast_if_negative(arg);
 		arg = arg % IDX_MOD;
 		move_ptr(data, &point, arg);
-		set_arguments(point, p->r[reg]);
+        set_arguments(data , p->r[reg], point, p->owner + 1);
 	}
 	else
 		p->r[arg] = p->r[reg];
