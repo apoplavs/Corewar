@@ -63,7 +63,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
     int ch = 0;
 
     i = 0;
-    while (i < cycles && ch != 's')
+    while (i < cycles)
     {
         tmp = pl->first;
         if (pl->v)
@@ -88,7 +88,7 @@ void    go_some_cycles(t_struct *pl, int cycles)
             tmp = tmp->next;
         }
         if (pl->v) {
-            ch = getch();
+            getch();
             refresh();
         }
         i++;
