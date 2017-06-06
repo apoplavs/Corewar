@@ -42,25 +42,24 @@ int     set_cycles(t_pc *cur)
     return 0 ;
 }
 
-//===============
-int kbhit(void)
+void    set_del(int *flag)
 {
-    int ch = getch();
-
-    if (ch != ERR) {
-        ungetch(ch);
-        return 1;
-    } else {
-        return 0;
+    if (*flag == 0) {
+        nodelay(stdscr, TRUE);
+        *flag = 1;
+    }
+    else {
+        nodelay(stdscr, FALSE);
+        *flag = 0;
     }
 }
-//===============
 
 void    go_some_cycles(t_struct *pl, int cycles)
 {
     int     i;
     t_pc    *tmp;
     int ch = 0;
+    int flag = 1;
 
     i = 0;
     while (i < cycles)
@@ -88,7 +87,10 @@ void    go_some_cycles(t_struct *pl, int cycles)
             tmp = tmp->next;
         }
         if (pl->v) {
-            getch();
+            ch = getch();
+            if (ch == ' ')
+                set_del(&flag);
+            usleep(10000);
             refresh();
         }
         i++;
