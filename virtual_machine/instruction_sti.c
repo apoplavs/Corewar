@@ -32,7 +32,9 @@ int 	sti(t_struct *data, t_pc *p)
 	if (args[2] == T_REG)
 		arg[1] = p->r[arg[1]];
 	point = p->pc_ptr - 1;
-	move_ptr(data, &point, arg[0] + arg[1]);
+	arg[0] = cast_if_negative(arg[0] + arg[1]);
+	arg[0] = arg[0] % IDX_MOD;
+	move_ptr(data, &point, arg[0]);
     set_arguments(data, p->r[reg], point, p->owner + 1);
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));
 	return (free_for_functions(args, args_len, 1));
