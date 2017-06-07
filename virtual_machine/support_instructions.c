@@ -51,10 +51,12 @@ void set_arguments(t_struct *pl, unsigned int reg, unsigned char *p, int color)
 
 	i = 0;
 	move = 0;
-	while (i < 4 )
+	while (i < 4)
 	{
 		tmp = reg << move;
-		p[i] = tmp >> 24;
+//        p[i] = tmp >> 24;
+		p[0] = tmp >> 24;
+		move_ptr(pl, &p, 1);
 		move += 8;
 		i++;
 	}

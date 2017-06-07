@@ -1,5 +1,3 @@
-
-
 #include "virtual_machine.h"
 
 int 	sti(t_struct *data, t_pc *p)
