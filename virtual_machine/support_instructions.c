@@ -46,23 +46,19 @@ void		get_len_write(unsigned char *args, unsigned char *args_len, int len_dir)
 void set_arguments(t_struct *pl, unsigned int reg, unsigned char *p, int color)
 {
 	unsigned int tmp;
-	unsigned char *tmp_p;
 	int move;
 	int i;
 
 	i = 0;
 	move = 0;
-	tmp_p = p;
 	while (i < 4)
 	{
 		tmp = reg << move;
-//		p[i] = tmp >> 24;
-		p[0] = tmp >> 24;
-		move_ptr(pl, &p, 1);
+        p[i] = tmp >> 24;
 		move += 8;
 		i++;
 	}
 	if (pl->v)
-		set_color(pl, tmp_p, color);
+		set_color(pl, p, color);
 }
 
