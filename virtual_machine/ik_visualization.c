@@ -49,10 +49,6 @@ void    out_cycles(t_struct *pl)
     int i;
     int j;
 
-    mvwprintw(info, 2, 2, "Cycles = ");
-    wattron(info, A_BOLD | COLOR_PAIR(6));
-    wprintw(info, "%d", ++pl->iterator);
-    wattroff(info, A_BOLD | COLOR_PAIR(6));
     i = 0;
     j = 8;
     while (i < pl->num_pl){

@@ -4,7 +4,7 @@ long int		cast_if_negative_sti(long int arg)
 	if (arg > 2147483647)
 	{
 		arg = arg - 4294967295;
-		if (arg != 0)
+		if (arg <= 0)
 			arg -= 1;
 	}
 	return (arg);

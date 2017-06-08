@@ -4,9 +4,11 @@
 int 		rearange_point(t_struct *data, unsigned char **p, unsigned char *args, int n)
 {
 	int 	i;
+	int		flag;
 
 	i = 0;
-	while (i < 3)
+	flag = 0;
+	while (i < g_tab[n].nb_param)
 	{
 		if (args[i] == T_REG)
 			move_ptr(data, p, 1);
@@ -19,8 +21,12 @@ int 		rearange_point(t_struct *data, unsigned char **p, unsigned char *args, int
 			else
 				move_ptr(data, p, 2);
 		}
+		if (args[i] > 0)
+			flag++;
 		i++;
 	}
+	if (flag == 0)
+		move_ptr(data, p, 1);
 	return (0);
 }
 
@@ -75,7 +81,7 @@ long int		cast_if_negative(long int arg)
 	if (arg > 32767)
 	{
 		arg = arg - 65535;
-		if (arg != 0)
+		if (arg <= 0)
 			arg -= 1;
 	}
 	return (arg);
