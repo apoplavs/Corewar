@@ -4,7 +4,7 @@ long int		cast_if_negative_sti(long int arg)
 	if (arg > 2147483647)
 	{
 		arg = arg - 4294967295;
-		if (arg != 0)
+		if (arg <= 0)
 			arg -= 1;
 	}
 	return (arg);
@@ -45,8 +45,12 @@ int 	sti(t_struct *data, t_pc *p)
 	point = p->pc_ptr - 1;
 	arg[0] = cast_if_negative_sti(arg[0]);
 	arg[1] = cast_if_negative_sti(arg[1]);
+	if (data->iterator > 5400)
+		wprintw(info ,"%d %d", arg[0], arg[1]);
 	arg[0] = cast_if_negative_sti(arg[0] + arg[1]);
 	arg[0] = arg[0] % IDX_MOD;
+//	if (data->iterator > 5400)
+//		wprintw(info ,"%d", arg[0]);
 	move_ptr(data, &point, arg[0]);
     set_arguments(data, p->r[reg], point, p->owner + 1);
 	move_ptr(data, &p->pc_ptr, (args_len[0] + args_len[1] + args_len[2] + 1));

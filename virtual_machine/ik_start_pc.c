@@ -28,8 +28,9 @@ int     set_cycles(t_pc *cur)
     int i;
 
     i = 0;
-    if (cur->cycles > 0)
+    if (cur->cycles > 0) {
         return 1;
+    }
     while (i < 16)
     {
         if (g_tab[i].opcode == *(cur->pc_ptr))
@@ -56,6 +57,36 @@ void    set_del(void)
     }
 }
 
+void    set_start_cycles(t_struct *pl)
+{
+    t_pc *tmp;
+
+    if (pl->v) {
+        visualization(pl, 4096);
+    }
+    tmp = pl->first;
+    while (tmp)
+    {
+        tmp->cycles--;
+        set_cycles(tmp);
+        if (pl->v) {
+            mvwchgat(map, (tmp->pc_ptr - pl->map) / 64 + 1, ((tmp->pc_ptr - pl->map) % 64) * 3 + 2, 2, 0, 7, NULL);
+        }
+        tmp = tmp->next;
+    }
+    if (pl->v) {
+        mvwprintw(info, 2, 2, "Cycle = ");
+        wattron(info, A_BOLD | COLOR_PAIR(6));
+        wprintw(info, "%d", 0);
+        wattroff(info, A_BOLD | COLOR_PAIR(6));
+        wrefresh (map);
+        wrefresh(info);
+        if (wgetch(map) == ' ')
+            set_del();
+        usleep(10000);
+    }
+}
+
 void    move_pc(t_struct *pl)
 {
     t_pc *tmp;
@@ -63,23 +94,22 @@ void    move_pc(t_struct *pl)
     tmp = pl->first;
     while (tmp)
     {
+        tmp->cycles--;
         if (tmp->cycles == 0) {
-            if (!g_fun[*(tmp->pc_ptr)](pl, tmp))
-                move_ptr(pl, &tmp->pc_ptr, 1);
+            g_fun[*(tmp->pc_ptr)](pl, tmp);
             tmp->cycles = -1;
         }
-        else
-        {
-            if (set_cycles(tmp))
-                tmp->cycles--;
-            else
-                move_ptr(pl, &tmp->pc_ptr, 1);
-        }
+        if (!set_cycles(tmp))
+            move_ptr(pl, &tmp->pc_ptr, 1);
         if (pl->v) {
             mvwchgat(map, (tmp->pc_ptr - pl->map) / 64 + 1, ((tmp->pc_ptr - pl->map) % 64) * 3 + 2, 2, 0, 7, NULL);
+            int z = 20;
+            //mvwprintw(info, z++, 2, "REG - [%d], [%d]",
+              //        tmp->r[9], tmp->r[10]);
         }
         tmp = tmp->next;
     }
+
 }
 
 void    go_some_cycles(t_struct *pl, int cycles)
@@ -94,11 +124,15 @@ void    go_some_cycles(t_struct *pl, int cycles)
         }
         move_pc(pl);
         if (pl->v) {
+            mvwprintw(info, 2, 2, "Cycle = ");
+            wattron(info, A_BOLD | COLOR_PAIR(6));
+            wprintw(info, "%d", ++pl->iterator);
+            wattroff(info, A_BOLD | COLOR_PAIR(6));
             wrefresh (map);
             wrefresh(info);
             if (wgetch(map) == ' ')
                 set_del();
-            usleep(10000);
+            usleep(1000);
         }
         i++;
     }
@@ -139,6 +173,7 @@ int     check_ending(t_struct *pl)
 void    start_vm(t_struct *pl)
 {
     write_code_to_field(pl);
+    set_start_cycles(pl);
     go_some_cycles(pl, pl->glob_cycles);
     while (check_ending(pl) != 1) {
         go_some_cycles(pl, pl->glob_cycles);
