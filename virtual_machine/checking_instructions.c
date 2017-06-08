@@ -1,6 +1,29 @@
 
 #include "virtual_machine.h"
 
+int 		rearange_point(t_struct *data, unsigned char **p, unsigned char *args, int n)
+{
+	int 	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (args[i] == T_REG)
+			move_ptr(data, p, 1);
+		else if (args[i] == T_IND)
+			move_ptr(data, p, 2);
+		else if (args[i] == T_DIR)
+		{
+			if (g_tab[n].index_size == 0)
+				move_ptr(data, p, 4);
+			else
+				move_ptr(data, p, 2);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int 		ft_check_arguments(unsigned char *arg, int n)
 {
 	if (g_tab[n].nb_param == 1)
@@ -27,7 +50,6 @@ int 		ft_check_arguments(unsigned char *arg, int n)
 int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n)
 {
 	unsigned char tmp;
-	int i;
 
 	tmp = **p;
 	args[0] = tmp >> 6;
@@ -44,25 +66,7 @@ int		ft_choose_arg(t_struct *data, unsigned char **p, unsigned char *args, int n
 		args[2] = 4;
 	//ft_printf("1 =%d 2 =%d 3 =%d\n", args[0], args[1], args[2]);
 	if (!ft_check_arguments(args, n))
-	{
-		i = 0;
-		while (i < 3)
-		{
-			if (args[i] == T_REG)
-				move_ptr(data, p, 1);
-			else if (args[i] == T_IND)
-				move_ptr(data, p, 2);
-			else if (args[i] == T_DIR)
-			{
-				if (g_tab[n].index_size == 0)
-					move_ptr(data, p, 4);
-				else
-					move_ptr(data, p, 2);
-			}
-			i++;
-		}
-		return (0);
-	}
+		return (rearange_point(data, p, args, n));
 	return (1);
 }
 

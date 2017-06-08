@@ -83,7 +83,7 @@ clean: libft_clean
 	@rm -f $(OBJ) lem_in.h.gch *~
 	@echo "\r\033[38;5;202m✖ clean $(NAME)\033[0m\033[K"
 
-fclean: clean libft_fclean
+fclean: clean #libft_fclean
 	@rm -f $(NAME)
 	@echo "\r\033[38;5;196m❌ fclean $(NAME)\033[0m\033[K"
 
