@@ -20,19 +20,19 @@
 # include <errno.h>
 # include <ncurses.h>
 
-typedef struct		s_op
+typedef struct      s_op
 {
-	char			*name;
-	int				nb_param;
-	char			params_types[3];
-	int				opcode;
-	int				nb_tours;
-	char			*full_name;
-	char			params_byte;
-	char			index_size;
-}					t_op;
+    char            *name;
+    int             nb_param;
+    char            params_types[3];
+    int             opcode;
+    int             nb_tours;
+    char            *full_name;
+    char            params_byte;
+    char            index_size;
+}                   t_op;
 
-t_op				*g_tab;
+t_op                *g_tab;
 
 typedef struct	s_pc
 {
@@ -45,8 +45,6 @@ typedef struct	s_pc
 	struct s_pc		*next;
     struct s_pc		*prev;
 }				t_pc;
-
-
 
 typedef struct	s_st
 {
@@ -83,6 +81,8 @@ typedef struct	s_struct
 
 int             (*g_fun[17])(t_struct *pl, t_pc *current_pc);
 
+WINDOW *map;
+WINDOW *info;
 # include "instructions.h"
 //if exist flag "-n", flag -dump will be ignored
 

@@ -47,11 +47,11 @@ void    set_del(void)
     static int flag;
 
     if (flag == 0) {
-        nodelay(stdscr, TRUE);
+        nodelay(map, TRUE);
         flag = 1;
     }
     else {
-        nodelay(stdscr, FALSE);
+        nodelay(map, FALSE);
         flag = 0;
     }
 }
@@ -76,7 +76,7 @@ void    move_pc(t_struct *pl)
                 move_ptr(pl, &tmp->pc_ptr, 1);
         }
         if (pl->v) {
-            mvchgat((tmp->pc_ptr - pl->map) / 64, ((tmp->pc_ptr - pl->map) % 64) * 3, 2, 0, 7, NULL);
+            mvwchgat(map, (tmp->pc_ptr - pl->map) / 64 + 1, ((tmp->pc_ptr - pl->map) % 64) * 3 + 2, 2, 0, 7, NULL);
         }
         tmp = tmp->next;
     }
@@ -89,14 +89,16 @@ void    go_some_cycles(t_struct *pl, int cycles)
     i = 0;
     while (i < cycles)
     {
-        if (pl->v)
+        if (pl->v) {
             visualization(pl, 4096);
+        }
         move_pc(pl);
         if (pl->v) {
-            if (getch() == ' ')
+            wrefresh (map);
+            wrefresh(info);
+            if (wgetch(map) == ' ')
                 set_del();
             usleep(10000);
-            refresh();
         }
         i++;
     }
