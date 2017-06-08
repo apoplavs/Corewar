@@ -23,7 +23,7 @@ int 	st(t_struct *data, t_pc *p)
 	args = (unsigned char *)ft_strnew(3);
 	args_len = (unsigned char *)ft_strnew(3);
 	move_ptr(data, &p->pc_ptr, 1);
-	if (!ft_choose_arg(data, &point, args, 2))
+	if (!ft_choose_arg(data, &p->pc_ptr, args, 2))
 		return (free_for_functions(args, args_len, 0));
 	point = p->pc_ptr;
 	move_ptr(data, &point, 1);

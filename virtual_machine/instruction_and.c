@@ -50,7 +50,7 @@ int			and(t_struct *data, t_pc *p)
 	args = (unsigned char *)ft_strnew(3);
 	args_len = (unsigned char *)ft_strnew(3);
 	move_ptr(data, &p->pc_ptr, 1);
-	if (!ft_choose_arg(data, &point, args, 5))
+	if (!ft_choose_arg(data, &p->pc_ptr, args, 5))
 		return (free_for_functions(args, args_len, 0));
 	point = p->pc_ptr;
 	move_ptr(data, &point, 1);
@@ -59,7 +59,6 @@ int			and(t_struct *data, t_pc *p)
 		|| ((arg[1] = get_argument(data, &point, args_len[2])) > 16 && args[2] == T_REG)
 		|| ((arg[2] = get_argument(data, &point, args_len[3])) > 16 && args[3] == T_REG))
 		return (free_for_functions(args, args_len, 0));
-	point = p->pc_ptr - 1;//нужно выносить?????
 	tmp_arg = arg;
 	ft_for_and_or_xor(data, p, &tmp_arg, args);
 	p->r[tmp_arg[2]] = tmp_arg[0] & tmp_arg[1];
