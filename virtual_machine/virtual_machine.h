@@ -13,12 +13,26 @@
 #ifndef VIRTUAL_MACHINE_H
 # define VIRTUAL_MACHINE_H
 
-# include "../asm/asm.h"
+//# include "../asm/asm.h"
 # include "../libftprintf/get_next_line.h"
 # include "../op.h"
 # include <stdio.h>
 # include <errno.h>
 # include <ncurses.h>
+
+typedef struct		s_op
+{
+	char			*name;
+	int				nb_param;
+	char			params_types[3];
+	int				opcode;
+	int				nb_tours;
+	char			*full_name;
+	char			params_byte;
+	char			index_size;
+}					t_op;
+
+t_op				*g_tab;
 
 typedef struct	s_pc
 {
