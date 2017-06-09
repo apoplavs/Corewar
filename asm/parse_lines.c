@@ -73,7 +73,7 @@ void 		ft_parse_lines(t_line *str)
 	t_line	*start;
 
 	start = str;
-	while (str->next->next)
+	while (str->next)
 	{
 		if (str->line[ft_strlen(str->line) - 1] == SEPARATOR_CHAR
 			|| ft_strstr(str->line, ",,"))
@@ -90,5 +90,4 @@ void 		ft_parse_lines(t_line *str)
 		del_tab(tab);
 		str = str->next;
 	}
-	//ft_printf("it`s good\n"); //DELETE!!
 }

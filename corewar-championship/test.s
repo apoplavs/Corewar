@@ -1,6 +1,9 @@
 .name		"S.A.M."
-.comment	"Ca roxxe du chameau"
+	.comment	"Ca roxxe du chameau"
 
-ld %0, r2
-fork %3
-zjmp %400
+	sti		r1, %10, %1
+
+shield:ld 10, r16
+	fork	%20
+	st		r1, 6
+	live	%21

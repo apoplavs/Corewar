@@ -71,5 +71,7 @@ machine_gun_init:
 	st		r1, 6
 
 machine_gun_gen:
-	live	%42
+live	%42
 	fork	%:machine_gun_gen
+
+	
