@@ -1,6 +1,6 @@
 #include "virtual_machine.h"
 
-void    write_code_to_field(t_struct *pl)
+static void    write_code_to_field(t_struct *pl)
 {
     t_pc            *tmp;
     unsigned char   *ptr;
@@ -9,7 +9,8 @@ void    write_code_to_field(t_struct *pl)
 
     i = 0;
     tmp = pl->last;
-    while (i < pl->num_pl) {
+    while (i < pl->num_pl)
+    {
         ptr = tmp->pc_ptr;
         j = 0;
         while (j < pl->players[i]->size_cd)
@@ -23,138 +24,73 @@ void    write_code_to_field(t_struct *pl)
     }
 }
 
-int     set_cycles(t_pc *cur)
-{
-    int i;
-
-    i = 0;
-    if (cur->cycles > 0) {
-        return 1;
-    }
-    while (i < 16)
-    {
-        if (g_tab[i].opcode == *(cur->pc_ptr))
-        {
-            cur->cycles = g_tab[i].nb_tours;
-            return 1 ;
-        }
-        i++;
-    }
-    return 0 ;
-}
-
-void    set_del(void)
-{
-    static int flag;
-
-    if (flag == 0) {
-        nodelay(map, TRUE);
-        flag = 1;
-    }
-    else {
-        nodelay(map, FALSE);
-        flag = 0;
-    }
-}
-
-void    set_start_cycles(t_struct *pl)
+static void    set_start_cycles(t_struct *pl)
 {
     t_pc *tmp;
 
-    if (pl->v) {
-        visualization(pl, 4096);
-    }
+    if (pl->v)
+        out_map(pl, 4096);
     tmp = pl->first;
     while (tmp)
     {
         tmp->cycles--;
         set_cycles(tmp);
-        if (pl->v) {
-            mvwchgat(map, (tmp->pc_ptr - pl->map) / 64 + 1, ((tmp->pc_ptr - pl->map) % 64) * 3 + 2, 2, 0, 7, NULL);
-        }
+        if (pl->v)
+            mvwchgat(map, (tmp->pc_ptr - pl->map) / 64, ((tmp->pc_ptr - pl->map) % 64) * 3, 2, 0, 7, NULL);
         tmp = tmp->next;
     }
-    if (pl->v) {
-        mvwprintw(info, 2, 2, "Cycle = ");
-        wattron(info, A_BOLD | COLOR_PAIR(6));
-        wprintw(info, "%d", 0);
-        wattroff(info, A_BOLD | COLOR_PAIR(6));
+    if (pl->v)
+    {
         wrefresh (map);
-        wrefresh(info);
+        out_info1(pl);
+        out_info2(pl);
+        out_info3(pl);
         if (wgetch(map) == ' ')
             set_del();
-        usleep(10000);
     }
 }
 
-void    move_pc(t_struct *pl)
-{
-    t_pc *tmp;
-
-    tmp = pl->first;
-    while (tmp)
-    {
-        tmp->cycles--;
-        if (tmp->cycles == 0) {
-            g_fun[*(tmp->pc_ptr)](pl, tmp);
-            tmp->cycles = -1;
-        }
-        if (!set_cycles(tmp))
-            move_ptr(pl, &tmp->pc_ptr, 1);
-        if (pl->v) {
-            mvwchgat(map, (tmp->pc_ptr - pl->map) / 64 + 1, ((tmp->pc_ptr - pl->map) % 64) * 3 + 2, 2, 0, 7, NULL);
-            int z = 20;
-            //mvwprintw(info, z++, 2, "REG - [%d], [%d]",
-              //        tmp->r[9], tmp->r[10]);
-        }
-        tmp = tmp->next;
-    }
-
-}
-
-void    go_some_cycles(t_struct *pl, int cycles)
+static void    go_some_cycles(t_struct *pl, int cycles)
 {
     int     i;
+    int     ch;
 
     i = 0;
     while (i < cycles)
     {
-        if (pl->v) {
-            visualization(pl, 4096);
-        }
+        if (pl->v)
+            out_map(pl, 4096);
         move_pc(pl);
-        if (pl->v) {
-            mvwprintw(info, 2, 2, "Cycle = ");
-            wattron(info, A_BOLD | COLOR_PAIR(6));
-            wprintw(info, "%d", ++pl->iterator);
-            wattroff(info, A_BOLD | COLOR_PAIR(6));
+        if (pl->v)
+        {
             wrefresh (map);
-            wrefresh(info);
-            if (wgetch(map) == ' ')
+            out_info1(pl);
+            out_info2(pl);
+            out_info3(pl);
+            ch = wgetch(map);
+            if (ch == '+')
+            {
+                if (pl->speed > 2000)
+                    pl->speed -= 2000;
+            }
+            else if (ch == '-')
+                pl->speed += 2000;
+            else if (ch == ' ')
                 set_del();
-            usleep(1000);
+            usleep(pl->speed);
         }
         i++;
     }
 }
 
-int     check_ending(t_struct *pl)
+static int     check_ending(t_struct *pl)
 {
-    t_pc    *tmp;
-    t_pc    *del;
+    int i;
 
-    tmp = pl->first;
-    while (tmp){
-        if (!tmp->live) {
-            del = tmp;
-            tmp = tmp->next;
-            delete_pc(pl, &del);
-        }
-        else {
-            tmp->live = 0;
-            tmp = tmp->next;
-        }
-    }
+    kill_or_save_pc(pl);
+    i = 0;
+    while (i < pl->num_pl)
+        pl->players[i++]->count_live = 0;
     if (!pl->first)
         return 1;
     if (pl->nbr_live >= NBR_LIVE || pl->max_checks == 1)
@@ -175,11 +111,9 @@ void    start_vm(t_struct *pl)
     write_code_to_field(pl);
     set_start_cycles(pl);
     go_some_cycles(pl, pl->glob_cycles);
-    while (check_ending(pl) != 1) {
+    while (check_ending(pl) != 1)
         go_some_cycles(pl, pl->glob_cycles);
-    }
-    if (pl->v) {
+    if (pl->v)
         out_winner(pl);
-    }
 }
 
