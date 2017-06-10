@@ -88,6 +88,7 @@ void 		ft_parse_lines(t_line *str)
 		else
 			exit_notice("invalid instruction ", str->line);
 		del_tab(tab);
+		//ft_printf("%s\n", str->line);
 		str = str->next;
 	}
 }
