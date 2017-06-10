@@ -118,7 +118,8 @@ char 		**separate_line(char *line)
 		str[++l] = line[++i];
 		if (line[i] == LABEL_CHAR && line[i - 1] != DIRECT_CHAR)
 			str[++l] = ' ';
-		if (line[i] == DIRECT_CHAR || (line[i] == 'r' && ft_isdigit(line[i + 1])) || (line[i] == '-' && ft_isdigit(line[i + 1])))
+		if (line[i] == DIRECT_CHAR || (line[i] == 'r' && ft_isdigit(line[i + 1]))
+			|| (line[i] == '-' && ft_isdigit(line[i + 1]) && line[i - 1] != DIRECT_CHAR))
 		{
 			str[l + 1] = str[l];
 			str[l++] = ' ';
@@ -142,7 +143,6 @@ void		trim_line(char *line, t_asm *file)
 		s = s->next;
 	s->line = ft_strnew(ft_strlen(line));
 	tab = separate_line(line);
-	//tab = ft_strsplit(line, ' ');
 	ft_strcpy(s->line, tab[0]);
 	while (tab[++i])
 	{

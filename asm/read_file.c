@@ -92,7 +92,8 @@ void		check_end_file(int fd)
 	position = lseek (fd, -1L, SEEK_CUR);
 	if (position == -1L)
 		ft_error("lseek to current position failed");
-	read(fd, line, 1);
+	if (read(fd, line, 1) == -1)
+		ft_error("no empty line in end of the file");
 	if (*line != '\n' && *line != ' ' && *line != '\t')
 		ft_error("no empty line in end of the file");
 	free(line);

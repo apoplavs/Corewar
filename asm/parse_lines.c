@@ -15,7 +15,7 @@
 void 		check_link(char *link, t_line *lines)
 {
 	link++;
-	while (lines->next->next)
+	while (lines->next)
 	{
 		if (ft_strnequ(link, lines->line, ft_strlen(link))
 			&& lines->line[ft_strlen(link)] == LABEL_CHAR)
