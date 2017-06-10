@@ -101,28 +101,31 @@ void	init_comment(int fd, t_asm *file, char *line)
 		ft_error("comment is very long");
 }
 
-char 		**separate_line(char *line)
+char 		**separate_line(char *line, int i, int l)
 {
 	char 	**tab;
 	char 	*str;
-	int 	i;
-	int 	l;
 
-
-	i = 0;
-	l = 0;
 	str = ft_strnew(ft_strlen(line) + 8);
 	str[l] = line[i];
 	while (line[i])
 	{
 		str[++l] = line[++i];
-		if (line[i] == LABEL_CHAR && line[i - 1] != DIRECT_CHAR)
+		if (line[i] == LABEL_CHAR && line[i - 1] != DIRECT_CHAR
+			&& line[i - 1] != ' ' && line[i - 1] != SEPARATOR_CHAR)
 			str[++l] = ' ';
-		if (line[i] == DIRECT_CHAR || (line[i] == 'r' && ft_isdigit(line[i + 1]))
-			|| (line[i] == '-' && ft_isdigit(line[i + 1]) && line[i - 1] != DIRECT_CHAR))
+		if (line[i] == DIRECT_CHAR
+			|| (line[i] == '-' && ft_isdigit(line[i + 1])
+				&& line[i - 1] != DIRECT_CHAR))
 		{
 			str[l + 1] = str[l];
 			str[l++] = ' ';
+		}
+		if (str[l] == SEPARATOR_CHAR && str[l - 1] == ' ')
+		{
+			while (str[l - 1] == ' ')
+				l--;
+			str[l] = SEPARATOR_CHAR;
 		}
 	}
 	tab = ft_strsplit(str, ' ');
@@ -142,7 +145,7 @@ void		trim_line(char *line, t_asm *file)
 	while (s->next)
 		s = s->next;
 	s->line = ft_strnew(ft_strlen(line));
-	tab = separate_line(line);
+	tab = separate_line(line, 0, 0);
 	ft_strcpy(s->line, tab[0]);
 	while (tab[++i])
 	{
