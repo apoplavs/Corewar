@@ -73,12 +73,10 @@ void	init_name(int fd, t_asm *file, char *line)
 		ft_error("name is very long");
 }
 
-void	init_comment(int fd, t_asm *file, char *line)
+void	init_comment(int fd, t_asm *file, char *line, int len)
 {
 	char *p;
-	int len;
 
-	len = 0;
 	file->comment = ft_strnew(COMMENT_LENGTH);
 	p = line;
 	p = point_jump(p);
@@ -88,25 +86,26 @@ void	init_comment(int fd, t_asm *file, char *line)
 		ft_error("invalid comment");
 	p++;
 	ft_strncpy(file->comment, p, com_len(p, &len));
-	if (!ft_strchr(line, '"'))
+	if (!ft_strchr(p, '"'))
 	{
+		free(line);
 		while (get_next_line(fd, &line) > 0)
 		{
 			ft_strncat(file->comment, line, com_len(line, &len));
 			if (ft_strchr(line, '"'))
 				break ;
+			free(line);
 		}
+		free(line);
 	}
 	if (len > COMMENT_LENGTH)
 		ft_error("comment is very long");
 }
 
-char 		**separate_line(char *line, int i, int l)
+char 		**separate_line(char *line, int i, int l, char 	*str)
 {
 	char 	**tab;
-	char 	*str;
 
-	str = ft_strnew(ft_strlen(line) + 8);
 	str[l] = line[i];
 	while (line[i])
 	{
@@ -145,7 +144,7 @@ void		trim_line(char *line, t_asm *file)
 	while (s->next)
 		s = s->next;
 	s->line = ft_strnew(ft_strlen(line));
-	tab = separate_line(line, 0, 0);
+	tab = separate_line(line, 0, 0, ft_strnew(ft_strlen(line) + 8));
 	ft_strcpy(s->line, tab[0]);
 	while (tab[++i])
 	{
