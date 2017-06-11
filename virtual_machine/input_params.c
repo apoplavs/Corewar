@@ -54,10 +54,6 @@ int		input_params(unsigned char **type_and_len, int *args, t_struct *data, t_pc 
 		args[i] = (int)get_argument(data, &point, type_and_len[1][i]);
 		if ((args[i] > 16 || args[i] <= 0) && type_and_len[0][i] == T_REG)
 			return (0);
-		if (type_and_len[0][i] == T_IND)
-			get_t_int(p->pc_ptr - 1, &args[i], data);
-		else if (type_and_len[0][i] == T_REG)
-			args[i] = (int)p->r[args[i]];
 		i++;
 	}
 	return (1);
