@@ -1,5 +1,7 @@
 .name		"zero"
 .comment	"Igor-bazuka"
 	
-label:
-    ldi %4, r2, r4
+	fork %8
+	sti r1, r3 ,r4
+	st r5, -8
+	st r5, -9
