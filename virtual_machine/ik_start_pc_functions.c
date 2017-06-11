@@ -49,6 +49,7 @@ void    move_pc(t_struct *pl)
         {
             if (pl->v)
                 out_info2(tmp);
+            printf("here]\n");
             g_fun[tmp->cur_fun](pl, tmp);
             tmp->cycles = -1;
             tmp->cur_fun = 0;

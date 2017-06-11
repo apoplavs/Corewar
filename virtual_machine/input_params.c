@@ -16,9 +16,11 @@ unsigned char	**init_type_len(void)
 {
 	unsigned char 	**type_and_len;
 
-	type_and_len = (char**)malloc(sizeof(type_and_len) * 2);
-	type_and_len[0] = ft_strnew(3);
-	type_and_len[1] = ft_strnew(3);
+	type_and_len = (unsigned char**)malloc(sizeof(type_and_len) * 3);
+	type_and_len[0] = (unsigned char*)ft_strnew(3);
+	type_and_len[1] = (unsigned char*)ft_strnew(3);
+	type_and_len[2] = NULL;
+	return (type_and_len) ;
 }
 
 void	get_t_int(unsigned char	*point, int *args, t_struct *data)
@@ -26,12 +28,12 @@ void	get_t_int(unsigned char	*point, int *args, t_struct *data)
 	short int res;
 
 	res = (short int)*args;
-	res = res % IDX_MOD;
+	res = (short int)(res % IDX_MOD);
 	move_ptr(data, &point, (int)res);
 	*args = (int)get_argument(data, &point, 4);
 }
 
-void	init_args(long int *args)
+void	init_args(int *args)
 {
 	args[0] = 0;
 	args[1] = 0;
