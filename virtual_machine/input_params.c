@@ -23,7 +23,7 @@ unsigned char	**init_type_len(void)
 	return (type_and_len) ;
 }
 
-void	get_t_int(unsigned char	*point, int *args, t_struct *data)
+void	get_indirect_value(unsigned char *point, int *args, t_struct *data)
 {
 	short int res;
 
@@ -32,6 +32,7 @@ void	get_t_int(unsigned char	*point, int *args, t_struct *data)
 	move_ptr(data, &point, (int)res);
 	*args = (int)get_argument(data, &point, 4);
 }
+
 
 void	init_args(int *args)
 {

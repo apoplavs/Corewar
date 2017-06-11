@@ -109,6 +109,7 @@ void            set_arguments(t_struct *data, unsigned int reg, unsigned char *p
 **input_params.c
 */
 unsigned char	**init_type_len(void);
+void	get_indirect_value(unsigned char *point, int *args, t_struct *data);
 int		input_params(unsigned char **type_and_len, int *args, t_struct *data, t_pc *p); // зчитує аргументи для команди
 
 #endif //COREVAR_INSTRUCTIONS_H
