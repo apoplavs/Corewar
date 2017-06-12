@@ -1,4 +1,5 @@
 .name		"zero"
 .comment	"Igor-bazuka"
 	
-	sti r1, r2, r3
+	ld %0, r2
+	st r2, 20

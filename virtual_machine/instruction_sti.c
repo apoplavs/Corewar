@@ -4,8 +4,8 @@
 
 int 	sti(t_struct *data, t_pc *p)
 {
-	int 		args[3];
-	int 		addr;
+	int 			args[3];
+	int 			addr;
 	unsigned char 	**type_and_len;
 	unsigned char	*start_point;
 
