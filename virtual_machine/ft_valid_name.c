@@ -33,6 +33,7 @@ void	ft_create_players(char **argv, char **names, t_struct *pl)
 		pl->players[i]->count_live = 0;
 		i++;
 	}
+	ft_free_db_array(names);
 }
 
 int		ft_len_db_array(char **array)

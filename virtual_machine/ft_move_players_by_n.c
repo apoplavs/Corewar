@@ -60,6 +60,7 @@ char 	**move_pl_index(int nb, char *player, char **names)
 		if (i == nb && j == 0)
 			new = ft_add_str_in_double(new, player);
 	}
+	ft_free_db_array(names);
 	return (new);
 }
 
@@ -67,7 +68,12 @@ char 	**ft_move_pl_by_n(char **argv, char **names, t_struct *pl)
 {
 	int		i;
 	int		num_tmp;
+	char	**tmp;
 
+	i = 0;
+	tmp = NULL;
+	while (names[i])
+		tmp = ft_add_str_in_double(tmp, names[i++]);
 	i = 0;
 	check_after_n_file(argv, pl);
 	while (argv[i])
@@ -76,12 +82,12 @@ char 	**ft_move_pl_by_n(char **argv, char **names, t_struct *pl)
 		{
 			num_tmp = argv[++i][0] - '0';
 			if (num_tmp - 1 < pl->num_pl)
-				names = move_pl_index(num_tmp - 1, argv[++i], names);
+				tmp = move_pl_index(num_tmp - 1, argv[++i], tmp);
 			else
 				ft_error("input number isn't correct");
 		}
 		else
 			i++;
 	}
-	return (names);
+	return (tmp);
 }
