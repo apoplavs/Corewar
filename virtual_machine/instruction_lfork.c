@@ -34,5 +34,6 @@ int 	lfork(t_struct *data, t_pc *p)
 		i++;
 	}
 	data->first->carry = p->carry;
+	data->first->live = p->live;
 	return (1);
 }

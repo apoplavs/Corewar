@@ -39,14 +39,11 @@ static void    go_some_cycles(t_struct *pl, int cycles)
         {
             wrefresh (map);
             out_info1(pl);
-            //out_info2(pl);
+            out_info2(pl);
             out_info3(pl);
             ch = wgetch(map);
-            if (ch == '+')
-            {
-                if (pl->speed > 2000)
-                    pl->speed -= 2000;
-            }
+            if (ch == '+' && pl->speed > 2000)
+                pl->speed -= 2000;
             else if (ch == '-')
                 pl->speed += 2000;
             else if (ch == ' ')

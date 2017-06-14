@@ -58,15 +58,12 @@ void    out_info1(t_struct *pl)
     wrefresh(info1);
 }
 
-void    out_info2(t_pc *tmp)
+void    out_info2(t_struct *pl)
 {
     werase(info2);
-    mvwprintw(info2, 1, 2, "Fun. number = %d",*(tmp->pc_ptr));
-    int i = 1;
-    while (i < 17){
-        mvwprintw(info2, i + 1, 2, "r%d = %d", i, tmp->r[i]);
-        i++;
-    }
+    mvwprintw(info2, 1, 2, "CYCLE_TO_DIE = %d", pl->glob_cycles);
+    mvwprintw(info2, 2, 2, "NBR_LIVE = %d", pl->nbr_live);
+    mvwprintw(info2, 3, 2, "MAX_CHECKS = %d", pl->max_checks);
     wrefresh(info2);
 }
 
@@ -100,7 +97,7 @@ void    out_start_position(t_struct *pl)
     }
     wrefresh (map);
     out_info1(pl);
-    //out_info2(pl);
+    out_info2(pl);
     out_info3(pl);
     if (wgetch(map) == ' ')
         set_del();
