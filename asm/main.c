@@ -60,7 +60,6 @@ int 		main(int argc, char **argv)
 	ft_parse_lines(file->code);
 	make_cor(file);
 	ft_printf("Writing output program to %s.cor\n", file->filename);
-	while(1);
 	return (0);
 }
 

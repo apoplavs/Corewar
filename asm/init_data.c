@@ -20,9 +20,7 @@ t_asm	*init_file(void)
 	file->name = NULL;
 	file->comment = NULL;
 	file->filename = NULL;
-	file->magic = COREWAR_EXEC_MAGIC;
 	file->code = NULL;
-	file->prog_size = 0;
 	file->code = NULL;
 	file->header = NULL;
 	file->prog = NULL;
