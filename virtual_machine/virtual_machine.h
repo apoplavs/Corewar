@@ -126,8 +126,6 @@ char	**ft_add_str_in_double(char **old, char *str);
 **free_memory.c
 */
 void	ft_free_db_array(char **array);
-int 	free_for_functions(void *old_1, void *old_2, int res);
-
 
 /*
 **ft_error.c
@@ -145,7 +143,6 @@ void    move_ptr(t_struct *pl, unsigned char **ptr, int i);
 ** ik_init_pc__function
 */
 void	init_pc(t_struct *pl, unsigned char *ptr, int i);
-void    push_back_pc(t_struct *pl, unsigned char *ptr, int i);
 void    delete_pc(t_struct *pl, t_pc **del);
 
 /*
@@ -173,7 +170,6 @@ void    out_info1(t_struct *pl);
 void    out_info2(t_struct *pl); //debug version
 void    out_info3(t_struct *pl);
 void    out_dump(t_struct *pl); //dump
-void    debuger(t_struct *data, t_fun_arg *arg, t_pc *p, int i); // deb
 void    out_start_position(t_struct *pl);
 void    out_winner(t_struct *pl);
 void    set_color(t_struct *pl, unsigned char *ptr, int color);

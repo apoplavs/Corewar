@@ -102,8 +102,8 @@ void	init_comment(int fd, t_asm *file, char *line, int len)
 			file->comment[ft_strlen(file->comment)] = '\n';
 			free(line);
 		}
-		free(line);
 	}
+	free(line);
 	if (len > COMMENT_LENGTH)
 		ft_error("comment is very long");
 }
