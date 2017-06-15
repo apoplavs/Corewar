@@ -6,26 +6,25 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 12:41:20 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/11 12:41:31 by apoplavs         ###   ########.fr       */
+/*   Updated: 2017/06/15 15:38:40 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char 		**separate_line(char *line, int i, int l, char 	*str)
+char	**separate_line(char *line, int i, int l, char *str)
 {
-	char 	**tab;
+	char	**tab;
 
 	str[l] = line[i];
 	while (line[i])
 	{
 		str[++l] = line[++i];
 		if (line[i] == LABEL_CHAR && line[i - 1] != DIRECT_CHAR
-			&& line[i - 1] != ' ' && line[i - 1] != SEPARATOR_CHAR)
+				&& line[i - 1] != ' ' && line[i - 1] != SEPARATOR_CHAR)
 			str[++l] = ' ';
-		if (line[i] == DIRECT_CHAR
-			|| (line[i] == '-' && ft_isdigit(line[i + 1])
-				&& line[i - 1] != DIRECT_CHAR))
+		if (line[i] == DIRECT_CHAR || (line[i] == '-'
+			&& ft_isdigit(line[i + 1]) && line[i - 1] != DIRECT_CHAR))
 		{
 			str[l + 1] = str[l];
 			str[l++] = ' ';
@@ -42,10 +41,10 @@ char 		**separate_line(char *line, int i, int l, char 	*str)
 	return (tab);
 }
 
-void		trim_line(char *line, t_asm *file)
+void	trim_line(char *line, t_asm *file)
 {
-	char 	**tab;
-	int 	i;
+	char	**tab;
+	int		i;
 	t_line	*s;
 
 	i = 0;
@@ -70,3 +69,21 @@ void		trim_line(char *line, t_asm *file)
 	del_tab(tab);
 }
 
+void	make_line(t_asm *file)
+{
+	t_line	*line;
+	t_line	*p;
+
+	line = malloc(sizeof(t_line));
+	line->line = NULL;
+	line->next = NULL;
+	if (!file->code)
+		file->code = line;
+	else
+	{
+		p = file->code;
+		while (p && p->next)
+			p = p->next;
+		p->next = line;
+	}
+}

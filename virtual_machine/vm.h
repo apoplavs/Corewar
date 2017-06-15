@@ -30,9 +30,7 @@ typedef struct      s_op
     char            index_size;
 }                   t_op;
 
-t_op                *g_tab;
-
-typedef struct	s_pc
+typedef struct		s_pc
 {
 	unsigned int 	r[17];
     int             owner;
@@ -43,22 +41,22 @@ typedef struct	s_pc
 	unsigned char	*pc_ptr;
 	struct s_pc		*next;
     struct s_pc		*prev;
-}				t_pc;
+}					t_pc;
 
-typedef struct	s_st
+typedef struct		s_st
 {
-	char				*file_name;
-	unsigned char		*magic;
-	unsigned char		*name;
-	int					size_cd;
-	unsigned char		*comment;
-	unsigned char 		*code;
+	char			*file_name;
+	unsigned char	*magic;
+	unsigned char	*name;
+	int				size_cd;
+	unsigned char	*comment;
+	unsigned char 	*code;
 
-	unsigned int 		player_number;
-    int                 count_live;
-}				t_st;
+	unsigned int 	player_number;
+    int             count_live;
+}					t_st;
 
-typedef struct	s_struct
+typedef struct		s_struct
 {
 	int				num_pl;
 	int				fl_dump;
@@ -77,18 +75,19 @@ typedef struct	s_struct
 
 	int 			current_cycle;
     useconds_t      speed;
-}				t_struct;
+}					t_struct;
 
-typedef struct	s_out
+typedef struct		s_out
 {
-	WINDOW *map;
-	WINDOW *info1;
-	WINDOW *info2;
-	WINDOW *info3;
-}				t_out;
+	WINDOW			*map;
+	WINDOW			*info1;
+	WINDOW			*info2;
+	WINDOW			*info3;
+}					t_out;
 
+t_op			g_tab[17];
 int             (*g_fun[17])(t_struct *pl, t_pc *current_pc);
-t_out			out;
+t_out			g_out;
 
 # include "vm_instructions.h"
 

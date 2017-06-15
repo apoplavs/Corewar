@@ -9,9 +9,9 @@ void set_color(t_struct *pl, unsigned char *ptr, int color)
     while (i < 4){
         j = (int)(ptr - pl->map);
         pl->color[j] = (unsigned char)(color);
-        wattron(out.map, A_BOLD | COLOR_PAIR(color + 10));
-        mvwprintw(out.map, j / 64, j % 64 * 3, "%02x", pl->map[j]);
-        wattroff(out.map, A_BOLD | COLOR_PAIR(color + 10));
+        wattron(g_out.map, A_BOLD | COLOR_PAIR(color + 10));
+        mvwprintw(g_out.map, j / 64, j % 64 * 3, "%02x", pl->map[j]);
+        wattroff(g_out.map, A_BOLD | COLOR_PAIR(color + 10));
         move_ptr(pl, &ptr, 1);
         i++;
     }
@@ -40,7 +40,7 @@ void    set_frame(void)
     int i;
     int j;
 
-    werase(out.map);
+    werase(g_out.map);
     i = 0;
     while (i < 68){
         attron(COLOR_PAIR(5));
@@ -71,12 +71,12 @@ void init_window(t_struct *pl)
     curs_set(0);
     set_my_color();
     set_frame();
-    out.map = newwin(64, 192, 2, 3);
-    out.info1 = newwin(32, 60, 1, 197);
-    out.info2 = newwin(20, 60, 34, 197);
-    out.info3 = newwin(11, 60, 55, 197);
-    wrefresh(out.map);
-    wrefresh(out.info1);
-    wrefresh(out.info2);
+    g_out.map = newwin(64, 192, 2, 3);
+    g_out.info1 = newwin(32, 60, 1, 197);
+    g_out.info2 = newwin(20, 60, 34, 197);
+    g_out.info3 = newwin(11, 60, 55, 197);
+    wrefresh(g_out.map);
+    wrefresh(g_out.info1);
+    wrefresh(g_out.info2);
     out_info3(pl);
 }

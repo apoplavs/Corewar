@@ -37,11 +37,11 @@ static void    go_some_cycles(t_struct *pl, int cycles)
         move_pc(pl);
         if (pl->fl_v)
         {
-            wrefresh (out.map);
+            wrefresh (g_out.map);
             out_info1(pl);
             out_info2(pl);
             out_info3(pl);
-            ch = wgetch(out.map);
+            ch = wgetch(g_out.map);
             if (ch == '+' && pl->speed > 2000)
                 pl->speed -= 2000;
             else if (ch == '-')
@@ -91,5 +91,9 @@ void    start_vm(t_struct *pl)
         go_some_cycles(pl, pl->glob_cycles);
     if (pl->fl_v)
         out_winner(pl);
+    else
+        ft_printf("Winner is player(\"%s\")[%d]",
+                pl->players[pl->number_last_live_player * -1 - 1]->name,
+                pl->number_last_live_player);
 }
 

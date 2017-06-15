@@ -6,13 +6,13 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 11:37:53 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/05/18 11:38:04 by apoplavs         ###   ########.fr       */
+/*   Updated: 2017/06/15 14:57:08 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		set_args(char *a1, char *a2, char *a3, char **params)
+void	set_args(char *a1, char *a2, char *a3, char **params)
 {
 	*a1 = 0;
 	*a2 = 0;
@@ -27,12 +27,12 @@ void		set_args(char *a1, char *a2, char *a3, char **params)
 		exit_notice("invalid argument ", params[3]);
 }
 
-int 		get_instruction(char *inst)
+int		get_instruction(char *inst)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
-	while(i < 16)
+	while (i < 16)
 	{
 		if (ft_strequ(inst, g_tab[i].name))
 			return (i);
@@ -42,7 +42,7 @@ int 		get_instruction(char *inst)
 	return (-1);
 }
 
-char 		type_arg(char *arg)
+char	type_arg(char *arg)
 {
 	if (arg[0] == 'r' && ft_isdigit(arg[1]))
 	{
@@ -64,26 +64,25 @@ char 		type_arg(char *arg)
 	return (0);
 }
 
-void 		check_arguments(char a1, char a2, char a3, int n)
+void	check_arguments(char a1, char a2, char a3, int n)
 {
 	if (g_tab[n].nb_param == 1)
 	{
 		if ((a1 & g_tab[n].params_types[0]) == 0
-			|| a2 > 0 || a3 > 0)
+				|| a2 > 0 || a3 > 0)
 			ft_error("invalid parameter");
 	}
 	if (g_tab[n].nb_param == 2)
 	{
 		if ((a1 & g_tab[n].params_types[0]) == 0
-			||(a2 & g_tab[n].params_types[1]) == 0 || a3 > 0)
+				|| (a2 & g_tab[n].params_types[1]) == 0 || a3 > 0)
 			ft_error("invalid parameter");
 	}
 	else if (g_tab[n].nb_param == 3)
 	{
 		if ((a1 & g_tab[n].params_types[0]) == 0
-			||(a2 & g_tab[n].params_types[1]) == 0
-			|| (a3 & g_tab[n].params_types[2]) == 0)
+				|| (a2 & g_tab[n].params_types[1]) == 0
+				|| (a3 & g_tab[n].params_types[2]) == 0)
 			ft_error("invalid type of parameter");
 	}
 }
-

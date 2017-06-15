@@ -6,7 +6,7 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 12:01:52 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/05/12 12:02:15 by apoplavs         ###   ########.fr       */
+/*   Updated: 2017/06/15 14:56:14 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_asm	*init_file(void)
 	return (file);
 }
 
-size_t 		com_len(char *p, int *len)
+size_t	com_len(char *p, int *len)
 {
 	size_t i;
 
@@ -53,8 +53,8 @@ void	move_point(char *line, char **p, int dist)
 
 void	init_name(int fd, t_asm *file, char *line)
 {
-	char *p;
-	int len;
+	char	*p;
+	int		len;
 
 	len = 0;
 	file->name = ft_strnew(PROG_NAME_LENGTH);
@@ -105,74 +105,3 @@ void	init_comment(int fd, t_asm *file, char *line, int len)
 	if (len > COMMENT_LENGTH)
 		ft_error("comment is very long");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -26,11 +26,11 @@ void    set_del(void)
     static int flag;
 
     if (flag == 0) {
-        nodelay(out.map, TRUE);
+        nodelay(g_out.map, TRUE);
         flag = 1;
     }
     else {
-        nodelay(out.map, FALSE);
+        nodelay(g_out.map, FALSE);
         flag = 0;
     }
 }
@@ -55,7 +55,7 @@ void    move_pc(t_struct *pl)
                 move_ptr(pl, &tmp->pc_ptr, 1);
         }
         if (pl->fl_v)
-            mvwchgat(out.map, (tmp->pc_ptr - pl->map) / 64,
+            mvwchgat(g_out.map, (tmp->pc_ptr - pl->map) / 64,
             ((tmp->pc_ptr - pl->map) % 64) * 3, 2, 0, 7, NULL);
         tmp = tmp->next;
     }
