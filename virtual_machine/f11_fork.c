@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_fork.c                                 :+:      :+:    :+:   */
+/*   f11_fork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "vm.h"
 
-int 	my_fork(t_struct *data, t_pc *p)
+int		my_fork(t_struct *data, t_pc *p)
 {
 	unsigned char	*start;
 	short int		value;
-	int 			i;
+	int				i;
 
 	start = p->pc_ptr;
 	move_ptr(data, &p->pc_ptr, 1);
@@ -24,10 +24,10 @@ int 	my_fork(t_struct *data, t_pc *p)
 	value = (short int)(value % IDX_MOD);
 	move_ptr(data, &start, value);
 	init_pc(data, start, p->owner);
-    if (data->fl_v)
-        mvwchgat(g_out.map, (start - data->map) / 64,
-                 ((start - data->map) % 64) * 3,
-                 2, 0, 7, NULL);
+	if (data->fl_v)
+		mvwchgat(out.map, (start - data->map) / 64,
+				((start - data->map) % 64) * 3,
+				2, 0, 7, NULL);
 	i = 0;
 	while (i < 17)
 	{

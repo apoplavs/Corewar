@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_live.c                                 :+:      :+:    :+:   */
+/*   f00_live.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 t_st				*get_player_live(t_struct *data, unsigned int player_number)
 {
-	int 			i;
+	int	i;
 
 	i = 0;
 	while (i < data->num_pl)
@@ -28,7 +28,7 @@ t_st				*get_player_live(t_struct *data, unsigned int player_number)
 
 int					live(t_struct *data, t_pc *p)
 {
-	unsigned int 	arg;
+	unsigned int	arg;
 	t_st			*player;
 
 	move_ptr(data, &p->pc_ptr, 1);
@@ -42,4 +42,3 @@ int					live(t_struct *data, t_pc *p)
 	p->live++;
 	return (1);
 }
-

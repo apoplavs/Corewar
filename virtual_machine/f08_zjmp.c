@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_zjmp.c                                 :+:      :+:    :+:   */
+/*   f08_zjmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-int 	zjmp(t_struct *data, t_pc *p)
+int		zjmp(t_struct *data, t_pc *p)
 {
 	unsigned char	*start;
 	short int		addr;

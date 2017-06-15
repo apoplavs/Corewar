@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_and.c                                  :+:      :+:    :+:   */
+/*   f05_and.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 int			and(t_struct *data, t_pc *p)
 {
-	t_fun_arg       arg;
+	t_fun_arg	arg;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;
