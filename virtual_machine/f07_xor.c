@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_xor.c                                  :+:      :+:    :+:   */
+/*   f07_xor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "vm.h"
 
-int			xor(t_struct *data, t_pc *p)
+int		xor(t_struct *data, t_pc *p)
 {
-	t_fun_arg       arg;
+	t_fun_arg	arg;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_lldi.c                                 :+:      :+:    :+:   */
+/*   f13_lldi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "vm.h"
 
-int 	lldi(t_struct *data, t_pc *p)
+int		lldi(t_struct *data, t_pc *p)
 {
-	t_fun_arg       arg;
-	int 			addr;
+	t_fun_arg	arg;
+	int			addr;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;
