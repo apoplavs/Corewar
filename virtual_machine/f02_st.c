@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f02_st.c                                           :+:      :+:    :+:   */
+/*   instruction_st.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include "vm.h"
 
-int		st(t_struct *data, t_pc *p)
+int 	st(t_struct *data, t_pc *p)
 {
-	t_fun_arg	      	arg;
-	unsigned char		*tmp_ptr;
+	t_fun_arg       arg;
+	unsigned char 	*tmp_ptr;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;

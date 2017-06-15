@@ -1,21 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   f09_ldi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/01 14:04:25 by dsemench          #+#    #+#             */
-/*   Updated: 2017/06/01 14:04:26 by dsemench         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
-int		ldi(t_struct *data, t_pc *p)
+int 	ldi(t_struct *data, t_pc *p)
 {
-	t_fun_arg	arg;
-	int			addr;
+	t_fun_arg       arg;
+	int 			addr;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;

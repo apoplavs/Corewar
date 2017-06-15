@@ -1,35 +1,24 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_pc_0.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/01 14:04:25 by dsemench          #+#    #+#             */
-/*   Updated: 2017/06/01 14:04:26 by dsemench         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vm.h"
 
 int     set_cycles(t_pc *cur)
 {
-	int i;
+    int i;
 
-	i = 0;
-	if (cur->cycles > 0)
-        return (1);
-	while (i < 16)
-	{
-		if (g_tab[i].opcode == *(cur->pc_ptr))
-		{
-			cur->cycles = g_tab[i].nb_tours - 1;
-			cur->cur_fun = *(cur->pc_ptr);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
+    i = 0;
+    if (cur->cycles > 0) {
+        return 1;
+    }
+    while (i < 16)
+    {
+        if (g_tab[i].opcode == *(cur->pc_ptr))
+        {
+            cur->cycles = g_tab[i].nb_tours - 1;
+            cur->cur_fun = *(cur->pc_ptr);
+            return 1 ;
+        }
+        i++;
+    }
+    return 0 ;
 }
 
 void    set_del(void)
@@ -37,11 +26,11 @@ void    set_del(void)
     static int flag;
 
     if (flag == 0) {
-        nodelay(out.map, TRUE);
+        nodelay(g_out.map, TRUE);
         flag = 1;
     }
     else {
-        nodelay(out.map, FALSE);
+        nodelay(g_out.map, FALSE);
         flag = 0;
     }
 }
@@ -66,7 +55,7 @@ void    move_pc(t_struct *pl)
                 move_ptr(pl, &tmp->pc_ptr, 1);
         }
         if (pl->fl_v)
-            mvwchgat(out.map, (tmp->pc_ptr - pl->map) / 64,
+            mvwchgat(g_out.map, (tmp->pc_ptr - pl->map) / 64,
             ((tmp->pc_ptr - pl->map) % 64) * 3, 2, 0, 7, NULL);
         tmp = tmp->next;
     }

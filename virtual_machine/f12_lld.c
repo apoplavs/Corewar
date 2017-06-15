@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f12_lld.c                                          :+:      :+:    :+:   */
+/*   instruction_lld.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "vm.h"
 
-int		lld(t_struct *data, t_pc *p)
+int 				lld(t_struct *data, t_pc *p)
 {
-	t_fun_arg	arg;
+	t_fun_arg       arg;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;

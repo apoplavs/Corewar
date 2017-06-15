@@ -1,20 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   f03_add.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/11 15:25:29 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/15 14:21:33 by dsemench         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "vm.h"
 
-int		add(t_struct *data, t_pc *p)
+int 	add(t_struct *data, t_pc *p)
 {
-	t_fun_arg	arg;
+	t_fun_arg       arg;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;

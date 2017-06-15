@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f04_sub.c                                          :+:      :+:    :+:   */
+/*   instruction_sub.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "vm.h"
 
-int		sub(t_struct *data, t_pc *p)
+int 	sub(t_struct *data, t_pc *p)
 {
-	t_fun_arg	arg;
+	t_fun_arg       arg;
 
 	init_fun_arg(&arg);
 	arg.start_point = p->pc_ptr;
