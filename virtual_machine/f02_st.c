@@ -14,7 +14,7 @@
 
 int		st(t_struct *data, t_pc *p)
 {
-	t_fun_arg	      	arg;
+	t_fun_arg			arg;
 	unsigned char		*tmp_ptr;
 
 	init_fun_arg(&arg);

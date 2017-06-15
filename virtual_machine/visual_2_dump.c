@@ -1,31 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visual_2_dump.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/23 18:50:00 by dsemench          #+#    #+#             */
+/*   Updated: 2017/05/26 16:53:34 by dsemench         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vm.h"
 
-void    out_dump(t_struct *pl)
+void	out_dump(t_struct *pl)
 {
-    int			i;
-    int			j;
+	int	i;
+	int	j;
 
-    i = 0;
-    j = 1;
-    while (i < pl->num_pl)
-    {
-        ft_printf("Player %d, \"%s\"\n",
-                  pl->players[i]->player_number * -1,
-                  pl->players[i]->name);
-        i++;
-    }
-    i = 0;
-    while (i < MEM_SIZE)
-    {
-        ft_printf("0x%04x :", i);
-        while (i < j * 64)
-        {
-            if (i < MEM_SIZE)
-                ft_printf(" %02x", pl->map[i]);
-            i++;
-        }
-        ft_printf("\n");
-        j++;
-    }
+	i = 0;
+	j = 1;
+	while (i < pl->num_pl)
+	{
+		ft_printf("Player %d, \"%s\"\n",
+				pl->players[i]->player_number * -1,
+				pl->players[i]->name);
+		i++;
+	}
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		ft_printf("0x%04x :", i);
+		while (i < j * 64)
+		{
+			if (i < MEM_SIZE)
+				ft_printf(" %02x", pl->map[i]);
+			i++;
+		}
+		ft_printf("\n");
+		j++;
+	}
 }
-
