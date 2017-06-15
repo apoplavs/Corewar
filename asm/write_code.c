@@ -1,6 +1,6 @@
 #include "asm.h"
 
-void    fill_mark(t_asm *file)
+static void    fill_mark(t_asm *file)
 {
     t_mark          *tmp_mark;
     t_mark_inside   *inside;
@@ -21,17 +21,22 @@ void    fill_mark(t_asm *file)
     }
 }
 
-int		find_quantity_elem_in_line(char **line)
+static void    write_command(t_asm *file, char **line)
 {
-    int i;
-
-    i = 0;
-    while (line[i])
-        i++;
-    return (i);
+    file->command_byte = file->i;
+    write_command_number(file, line[0]);
+    file->arg_byte = file->i;
+    if (g_tab[file->tab_nb].params_byte)
+    {
+        if (file->i < CHAMP_MAX_SIZE - 1)
+            file->i++;
+        else
+            ft_error("champion length more than CHAMP_MAX_SIZE");
+    }
+    write_arguments_number(file, ft_strsplit(line[1], ','));
 }
 
-void    make_prog(t_asm *file)
+static void    make_prog(t_asm *file)
 {
     t_line  *tmp;
     char    **line;
@@ -51,13 +56,33 @@ void    make_prog(t_asm *file)
             write_command(file, &line[1]);
         }
         tmp = tmp->next;
-        i = 0;
-        while (line[i])
-            ft_strdel(&line[i++]);
-        free(line);
+        free_arr(&line);
     }
     file->prog_len = file->i;
     file->i = 136;
     write_dir(file, file->header, (unsigned int)file->prog_len);
     fill_mark(file);
+}
+
+void    make_cor(t_asm *file)
+{
+    int j;
+
+    file->header = ft_strnew(PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+    file->prog = ft_strnew(CHAMP_MAX_SIZE);
+    //ft_bzero(file->header, PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+    //ft_bzero(file->prog, CHAMP_MAX_SIZE);
+    write_dir(file, file->header,COREWAR_EXEC_MAGIC);
+    j = 0;
+    while (file->name[j])
+        file->header[file->i++] = file->name[j++];
+    file->i = 136;
+    write_dir(file, file->header,0);
+    j = 0;
+    while (file->comment[j])
+        file->header[file->i++] = file->comment[j++];
+    file->i = 0;
+    make_prog(file);
+    print_memory(file, file->header, PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+    print_memory(file, file->prog, (unsigned int)file->prog_len);
 }

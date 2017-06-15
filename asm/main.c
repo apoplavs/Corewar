@@ -62,4 +62,3 @@ int 		main(int argc, char **argv)
 	ft_printf("Writing output program to %s.cor\n", file->filename);
 	return (0);
 }
-

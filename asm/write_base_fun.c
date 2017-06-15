@@ -43,25 +43,27 @@ void    write_dir(t_asm *file, char *str,unsigned int dir)
     }
 }
 
-void    make_cor(t_asm *file)
+int		find_quantity_elem_in_line(char **line)
 {
-    int j;
+    int i;
 
-    file->header = ft_strnew(4 + PROG_NAME_LENGTH + 8 + 4 + COMMENT_LENGTH);
-    file->prog = ft_strnew(CHAMP_MAX_SIZE);
-    ft_bzero(file->header, 4 + PROG_NAME_LENGTH + 8 + 4 + COMMENT_LENGTH);
-    ft_bzero(file->prog, CHAMP_MAX_SIZE);
-    write_dir(file, file->header,COREWAR_EXEC_MAGIC);
-    j = 0;
-    while (file->name[j])
-        file->header[file->i++] = file->name[j++];
-    file->i = 136;
-    write_dir(file, file->header,0); // there must be champ_size
-    j = 0;
-    while (file->comment[j])
-        file->header[file->i++] = file->comment[j++];
-    file->i = 0;
-    make_prog(file);
-    print_memory(file, file->header, 4 + PROG_NAME_LENGTH + 8 + 4 + COMMENT_LENGTH);
-    print_memory(file, file->prog, (unsigned int)file->prog_len);
+    i = 0;
+    while (line[i])
+        i++;
+    return (i);
+}
+
+void	print_memory(t_asm *file, const void *addr, size_t size)
+{
+    unsigned char	*mem;
+    unsigned char	c;
+    size_t			i;
+
+    i = 0;
+    mem = (unsigned char*)addr;
+    while (i < size) {
+        c = mem[i];
+        write(file->fd_filename, &c, 1);
+        i++;
+    }
 }

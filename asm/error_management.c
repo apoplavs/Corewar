@@ -36,15 +36,3 @@ char		*point_jump(char *p)
 		p++;
 	return (p);
 }
-
-int 	correct_char(char c)
-{
-	if (ft_strchr(LABEL_CHARS, c)
-		|| c == LABEL_CHAR || c == DIRECT_CHAR
-		|| c == SEPARATOR_CHAR || c == '-'
-		|| c == '+' || (c <= 'z' && c >= 'a')
-		|| c == ' ' || c == '\t')
-		return (1);
-	else
-		return (0);
-}

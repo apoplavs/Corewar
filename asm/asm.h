@@ -107,16 +107,12 @@ void				exit_notice(char *note, char *line);
 */
 void				del_tab(char **tab);
 void				convert_tabs(char *str);
+void                free_arr(char ***arr);
 
 /*
 ** parse_lines.c
 */
 void				ft_parse_lines(t_line *str);
-
-/*
-** ik_functions
-*/
-void    make_cor(t_asm *file);
 
 
 /*
@@ -128,20 +124,28 @@ char 				type_arg(char *arg);
 void 				check_arguments(char a1, char a2, char a3, int n);
 
 /*
-** ik_functions
+** write_init_mark
+*/
+void    init_mark(t_asm *file, char *name, int steps);
+void    init_mark_inside(t_asm *file, t_mark **mark, int rdi);
+
+/*
+** write_code
 */
 void    make_cor(t_asm *file);
-void	print_memory(t_asm *file, const void *addr, size_t size); // delete
-int		find_quantity_elem_in_line(char **line);
-void    make_prog(t_asm *file);
+void    write_command_number(t_asm *file, char *command_name);
+void    write_arguments_number(t_asm *file, char **arg);
+void    check_dir_number(t_asm *file, char *dir);
+void    check_ind_number(t_asm *file, char *ind);
+void    write_mark_place(t_asm *file, char *mark, int rdi);
 
+/*
+** write_base_fun
+*/
 void    write_reg(t_asm *file, char *str, unsigned char reg);
 void    write_ind(t_asm *file, char *str, unsigned short ind);
 void    write_dir(t_asm *file, char *str, unsigned int dir);
-
-void    init_mark(t_asm *file, char *name, int steps);
-void    init_mark_inside(t_asm *file, t_mark **mark, int rdi);
-void    write_command(t_asm *file, char **line);
-void    write_mark_place(t_asm *file, char *mark, int rdi);
+int		find_quantity_elem_in_line(char **line);
+void	print_memory(t_asm *file, const void *addr, size_t size);
 
 #endif

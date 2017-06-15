@@ -115,7 +115,7 @@ int		ft_len_db_array(char **array);
 char 	**ft_move_pl_by_n(char **argv, char **names, t_struct *pl);
 
 /*
-**alloc_and_free_memory.c
+** alloc_and_free
 */
 char	**ft_add_str_in_double(char **old, char *str);
 void	ft_free_db_array(char **array);
