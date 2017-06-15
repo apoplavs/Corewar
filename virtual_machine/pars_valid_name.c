@@ -6,7 +6,7 @@
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 15:46:43 by dsemench          #+#    #+#             */
-/*   Updated: 2017/05/22 15:46:48 by dsemench         ###   ########.fr       */
+/*   Updated: 2017/06/15 18:19:20 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_create_players(char **argv, char **names, t_struct *pl)
 	}
 }
 
-int		ft_len_db_array(char **array)
+int		len_arr(char **array)
 {
 	int i;
 
@@ -45,9 +45,8 @@ int		ft_len_db_array(char **array)
 	return (i);
 }
 
-void	ft_valid_name(char **argv, t_struct *pl)
+void	ft_valid_name(char **argv, t_struct *pl, int i)
 {
-	int		i;
 	char	**names;
 	char	**tmp;
 
@@ -56,7 +55,7 @@ void	ft_valid_name(char **argv, t_struct *pl)
 	while (argv[i])
 	{
 		tmp = ft_strsplit(argv[i], '.');
-		if (ft_len_db_array(tmp) >= 2 && ft_strequ(tmp[ft_len_db_array(tmp) - 1], "cor"))
+		if (len_arr(tmp) >= 2 && ft_strequ(tmp[len_arr(tmp) - 1], "cor"))
 		{
 			names = ft_add_str_in_double(names, argv[i]);
 			pl->num_pl++;

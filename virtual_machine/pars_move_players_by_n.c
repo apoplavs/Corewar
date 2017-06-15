@@ -26,7 +26,7 @@ void	check_after_n_file(char **argv, t_struct *pl)
 			if (argv[i])
 			{
 				tmp = ft_strsplit(argv[i], '.');
-				if (!ft_strequ(tmp[ft_len_db_array(tmp) - 1], "cor"))
+				if (!ft_strequ(tmp[len_arr(tmp) - 1], "cor"))
 					ft_error("after flag '-n' number[1-4] 'file.cor'");
 				ft_free_db_array(tmp);
 			}

@@ -45,6 +45,6 @@ void	ft_bchar(unsigned char *arr, int size, unsigned char c)
 
 void	ft_error(char *error)
 {
-	ft_printf("%s\n", error);
+	ft_printf("ERROR: %s\n", error);
 	exit(1);
 }

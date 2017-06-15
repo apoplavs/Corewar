@@ -105,8 +105,8 @@ void 	ft_search_flags(char **argc, int argv, t_struct	*pl);
 /*
 **valid_name.c
 */
-void 	ft_valid_name(char **argv, t_struct *pl);
-int		ft_len_db_array(char **array);
+void ft_valid_name(char **argv, t_struct *pl, int i);
+int		len_arr(char **array);
 
 /*
 ** ft_move_players_by_n
