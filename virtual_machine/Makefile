@@ -50,11 +50,12 @@ SRC =  main.c \
        f15_aff.c \
        visual_0.c \
        visual_1.c \
-       visual_2_dump.c \
+       visual_2.c \
+       visual_3_dump.c \
 
 OBJ = $(SRC:.c=.o)
 
-HEADERS = ../libftprintf/get_next_line.h vm.h ../op.h vm_instructions.h
+HEADERS = ../libftprintf/get_next_line.h vm.h ../op.h
 
 FLAGS = -Wall -Wextra -Werror
 

@@ -6,7 +6,7 @@
 /*   By: dsemench <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/22 15:46:43 by dsemench          #+#    #+#             */
-/*   Updated: 2017/06/15 18:19:20 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/15 20:41:47 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void	ft_valid_name(char **argv, t_struct *pl, int i)
 	char	**names;
 	char	**tmp;
 
-	i = 1;
 	names = NULL;
-	while (argv[i])
+	while (argv[++i])
 	{
 		tmp = ft_strsplit(argv[i], '.');
 		if (len_arr(tmp) >= 2 && ft_strequ(tmp[len_arr(tmp) - 1], "cor"))
@@ -67,7 +66,6 @@ void	ft_valid_name(char **argv, t_struct *pl, int i)
 				|| (ft_strequ(tmp[0], "-n") && pl->fl_n > 0))
 			i++;
 		ft_free_db_array(tmp);
-		i++;
 	}
 	if (pl->num_pl > 4)
 		ft_error("to many bots");
