@@ -20,16 +20,16 @@ void	ft_create_players(char **argv, char **names, t_struct *pl)
 	if (!names)
 		ft_error("no players");
 	names = ft_move_pl_by_n(argv, names, pl);
-	pl->players	= (t_st **)malloc(sizeof(pl->players) * (pl->num_pl + 1));
+	pl->players = (t_st **)malloc(sizeof(pl->players) * (pl->num_pl + 1));
 	pl->players[pl->num_pl] = NULL;
 	while (names && i < pl->num_pl)
 	{
 		pl->players[i] = (t_st *)malloc(sizeof(t_st));
 		pl->players[i]->file_name = ft_strdup(names[i]);
 		pl->players[i]->player_number = (unsigned int)((i + 1) * -1);
-        pl->number_last_live_player = pl->players[i]->player_number;
-        init_pc(pl, pl->map + i * (MEM_SIZE / pl->num_pl), i);
-        pl->first->r[1] = pl->players[i]->player_number;
+		pl->number_last_live_player = pl->players[i]->player_number;
+		init_pc(pl, pl->map + i * (MEM_SIZE / pl->num_pl), i);
+		pl->first->r[1] = pl->players[i]->player_number;
 		pl->players[i]->count_live = 0;
 		i++;
 	}
@@ -45,10 +45,10 @@ int		ft_len_db_array(char **array)
 	return (i);
 }
 
-void 	ft_valid_name(char **argv, t_struct *pl)
+void	ft_valid_name(char **argv, t_struct *pl)
 {
 	int		i;
-	char 	**names;
+	char	**names;
 	char	**tmp;
 
 	i = 1;
