@@ -6,7 +6,7 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 10:07:29 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/15 14:34:54 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/17 14:09:50 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int		main(int argc, char **argv)
 	t_asm	*file;
 
 	if (argc != 2)
-		ft_error("\nusage: ./asm file.s");
+	{
+		ft_printf("usage: ./asm file.s\n");
+		exit(1);
+	}
 	if ((fd = open(argv[1], O_RDONLY, 0)) == -1)
 		ft_error("invalid file");
 	file = init_file();

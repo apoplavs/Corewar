@@ -6,22 +6,11 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 12:01:52 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/16 18:46:34 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/17 14:06:17 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-size_t	com_len(char *p, int *len)
-{
-	size_t i;
-
-	i = 0;
-	while (p[i] && p[i] != '"')
-		i++;
-	*len += i;
-	return (i);
-}
 
 void	move_point(char *line, char **p, int dist)
 {
@@ -29,6 +18,17 @@ void	move_point(char *line, char **p, int dist)
 	*p = point_jump(*p);
 	*p += dist;
 	*p = point_jump(*p);
+}
+
+void	check_name_com(char *line)
+{
+	char	*tmp;
+
+	tmp = ft_strchr(line, '"');
+	tmp++;
+	tmp = point_jump(tmp);
+	if (*tmp != '\0' && *tmp != COMMENT_CHAR)
+		exit_notice("invalid token", tmp);
 }
 
 void	check_end_comment(int fd, char **str, int len_max)
@@ -47,6 +47,7 @@ void	check_end_comment(int fd, char **str, int len_max)
 		ft_strncat(*str, line, com_len(line, &len));
 		if (ft_strchr(line, '"'))
 		{
+			check_name_com(line);
 			flag = 1;
 			break ;
 		}
@@ -74,6 +75,8 @@ void	init_name(int fd, t_asm *file, char *line)
 	ft_strncpy(file->name, p, com_len(p, &len));
 	if (!ft_strchr(p, '"'))
 		check_end_comment(fd, &file->name, PROG_NAME_LENGTH);
+	else
+		check_name_com(p);
 }
 
 void	init_comment(int fd, t_asm *file, char *line)
@@ -92,4 +95,6 @@ void	init_comment(int fd, t_asm *file, char *line)
 	ft_strncpy(file->comment, p, com_len(p, &len));
 	if (!ft_strchr(p, '"'))
 		check_end_comment(fd, &file->comment, COMMENT_LENGTH);
+	else
+		check_name_com(p);
 }

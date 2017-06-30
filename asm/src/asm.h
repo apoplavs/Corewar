@@ -6,7 +6,7 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 10:15:27 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/15 15:35:57 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/17 14:26:36 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ASM_H
 
 # include "../../libftprintf/get_next_line.h"
-# include "../../op.h"
+# include "op.h"
 
 typedef struct		s_m_i
 {

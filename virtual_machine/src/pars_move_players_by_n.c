@@ -39,49 +39,99 @@ void	check_after_n_file(char **argv, t_struct *pl)
 	}
 }
 
-char	**move_pl_index(int nb, char *player, char **names)
+int		position(char **argv, int i)
 {
-	int		i;
 	int		j;
-	char	**new;
+	int		res;
+	char	**tmp;
 
-	i = -1;
 	j = 0;
-	new = NULL;
-	while (names[++i])
+	res = 0;
+	while (argv[j])
 	{
-		if (nb == 0 && j == 0)
+		tmp = ft_strsplit(argv[j], '.');
+		if (ft_strequ(tmp[len_arr(tmp) - 1], "cor"))
 		{
-			new = ft_add_str_in_double(new, player);
-			j = 1;
+			if ((j - 2) > 0)
+				if (argv[j - 2] && ft_strequ(argv[j - 2], "-n") && j == i)
+				{
+					ft_free_db_array(tmp);
+					return (res);
+				}
+			res++;
 		}
-		if (!ft_strequ(names[i], player))
-			new = ft_add_str_in_double(new, names[i]);
-		if (i == nb && j == 0)
-			new = ft_add_str_in_double(new, player);
+		ft_free_db_array(tmp);
+		j++;
 	}
-	return (new);
+	return (res);
 }
 
-char	**ft_move_pl_by_n(char **argv, char **names, t_struct *pl)
+void	exchange(char **first, char **second)
+{
+	char *buff;
+
+	buff = ft_strdup(*first);
+	free(*first);
+	*first = ft_strdup(*second);
+	free(*second);
+	*second = ft_strdup(buff);
+	free(buff);
+}
+
+char	**ft_sort_players(char **names, char *order, int i)
+{
+	int		tmp;
+	int		flag;
+	char	buff;
+
+	flag = 0;
+	while (order[++i])
+	{
+		tmp = order[i - 1] - '0';
+		if (tmp > order[i] - '0')
+		{
+			buff = order[i - 1];
+			order[i - 1] = order[i];
+			order[i] = buff;
+			exchange(&names[i - 1], &names[i]);
+			flag = 1;
+		}
+		else if (tmp == order[i] - '0')
+			exchange(&names[i - 1], &names[i]);
+		if (flag == 1)
+		{
+			i = 0;
+			flag = 0;
+		}
+	}
+	return (names);
+}
+
+char	**ft_move_pl_by_n(char **argv, char **names, t_struct *pl, int tmp_nb)
 {
 	int		i;
-	int		num_tmp;
+	char	*order;
 
-	i = 0;
+	i = -1;
 	check_after_n_file(argv, pl);
+	order = ft_strnew((size_t)pl->num_pl);
+	while (names[++i])
+		order[i] = (char)(i + '0' + 1);
+	i = 0;
 	while (argv[i])
-	{
 		if (ft_strequ(argv[i], "-n"))
 		{
-			num_tmp = argv[++i][0] - '0';
-			if (num_tmp - 1 < pl->num_pl)
-				names = move_pl_index(num_tmp - 1, argv[++i], names);
+			if (argv[++i][0] - 1 - '0' < pl->num_pl)
+			{
+				tmp_nb = position(argv, (++i));
+				order[tmp_nb] = (argv[i - 1][0]);
+			}
 			else
 				ft_error("input number isn't correct");
 		}
 		else
 			i++;
-	}
+	names = ft_sort_players(names, order, 0);
+	free(order);
 	return (names);
 }

@@ -70,6 +70,8 @@ void			ft_write_pl_info(size_t size,
 	if (pl->players[i]->size_cd > CHAMP_MAX_SIZE
 		|| (int)size - point > CHAMP_MAX_SIZE)
 		ft_error("size of program is to bigger than max declared size");
+	if (ft_interpretation(pl->players[i]->magic, 4) != COREWAR_EXEC_MAGIC)
+		ft_error("bad magic number");
 }
 
 void			ft_parsing_file(t_struct *pl)

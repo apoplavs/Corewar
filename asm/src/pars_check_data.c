@@ -45,7 +45,7 @@ void	check_t_reg(char *ins)
 	int	r;
 
 	r = ft_atoi(&ins[1]);
-	if (r > REG_NUMBER)
+	if (r < 1 || r > REG_NUMBER)
 		ft_error("invalid number of register");
 }
 

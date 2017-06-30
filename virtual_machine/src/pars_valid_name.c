@@ -19,7 +19,7 @@ void	ft_create_players(char **argv, char **names, t_struct *pl)
 	i = 0;
 	if (!names)
 		ft_error("no players");
-	names = ft_move_pl_by_n(argv, names, pl);
+	names = ft_move_pl_by_n(argv, names, pl, 0);
 	pl->players = (t_st **)malloc(sizeof(pl->players) * (pl->num_pl + 1));
 	pl->players[pl->num_pl] = NULL;
 	while (names && i < pl->num_pl)

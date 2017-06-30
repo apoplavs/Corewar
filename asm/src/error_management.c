@@ -6,7 +6,7 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 10:37:14 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/15 14:29:28 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/17 14:05:21 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,15 @@ char	*point_jump(char *p)
 	while (*p && (*p == ' ' || *p == '\t'))
 		p++;
 	return (p);
+}
+
+size_t	com_len(char *p, int *len)
+{
+	size_t i;
+
+	i = 0;
+	while (p[i] && p[i] != '"')
+		i++;
+	*len += i;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: apoplavs <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/12 10:41:07 by apoplavs          #+#    #+#             */
-/*   Updated: 2017/06/16 18:46:55 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/17 14:06:39 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,19 @@ void	check_end_file(int fd)
 {
 	char	*line;
 	long	position;
+	size_t	i;
 
-	line = ft_strnew(1);
-	position = lseek(fd, -1L, SEEK_CUR);
-	if (position == -1L)
-		ft_error("lseek to current position failed");
-	if (read(fd, line, 1) == -1)
+	position = lseek(fd, -1L, SEEK_END);
+	if (position == -1L || position >= 65535)
+		ft_error("invalid file");
+	line = ft_strnew((size_t)position);
+	lseek(fd, 0L, SEEK_SET);
+	if (read(fd, line, 65535) == -1)
 		ft_error("no empty line in end of the file");
-	if (*line != '\n' && *line != ' ' && *line != '\t')
+	i = ft_strlen(line) - 1;
+	while (i > 0 && (line[i] == ' ' || line[i] == '\t'))
+		i--;
+	if (line[i] != '\n')
 		ft_error("no empty line in end of the file");
 	free(line);
 }
@@ -101,4 +106,6 @@ void	read_file(int fd, t_asm *file)
 	}
 	free(line);
 	check_end_file(fd);
+	if (!file->code->line)
+		ft_error("no code");
 }

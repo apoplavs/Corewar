@@ -6,7 +6,7 @@
 /*   By: ikryvenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/15 20:35:20 by ikryvenk          #+#    #+#             */
-/*   Updated: 2017/06/15 20:39:24 by ikryvenk         ###   ########.fr       */
+/*   Updated: 2017/06/20 14:33:50 by ikryvenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define VM_H
 
 # include "../../libftprintf/get_next_line.h"
-# include "../../op.h"
+# include "op.h"
 # include <errno.h>
 # include <ncurses.h>
 # include <SDL2/SDL.h>
@@ -103,7 +103,8 @@ int					ft_interpretation(unsigned char *str, int size);
 void				ft_search_flags(char **argc, int argv, t_struct	*pl);
 void				ft_valid_name(char **argv, t_struct *pl, int i);
 int					len_arr(char **array);
-char				**ft_move_pl_by_n(char **argv, char **names, t_struct *pl);
+char				**ft_move_pl_by_n(char **argv, char **names,
+		t_struct *pl, int tmp_nb);
 
 /*
 ** alloc_and_free
